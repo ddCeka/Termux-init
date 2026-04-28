@@ -1,0 +1,8 @@
+corrupy @ file:///data/data/com.termux/files/home/termux-init/package/pip/corrupy-0.1.1.tar.gz#sha256=3b08a00f80a6f9bcd0c938769ef3352f1126627805d26fa1e4f42865a4035784
+evbunpack @ file:///data/data/com.termux/files/home/termux-init/package/pip/evbunpack-0.2.6.zip#sha256=df19a0c6cc60981dc3963961e1b5cd34120b940dde06b410c1db0e674c7d51b6
+lxml @ file:///data/data/com.termux/files/home/termux-init/package/pip/lxml-6.1.0.tar.gz#sha256=bfd57d8008c4965709a919c3e9a98f76c2c7cb319086b3d26858250620023b13
+megaloader @ file:///data/data/com.termux/files/home/termux-init/package/pip/megaloader-0.1.0.tar.gz#sha256=6770efe27d176db91420f46f7776c2b0af583071fb6d0f5cfa759e87138dfdbe
+megaloader-cli @ file:///data/data/com.termux/files/home/termux-init/package/pip/megaloader_cli-0.1.0.tar.gz#sha256=81e4974eeae1a270d95ba06398ed0b7c85c5fa0c8f3ebd6e3982654655f6f0ea
+unrpa @ file:///data/data/com.termux/files/home/termux-init/package/pip/unrpa-2.3.0.zip#sha256=b01041148dab480dd2be907f2ffef954352e5feaf5f2547b42035c1d9f74af59
+unrpyc @ file:///data/data/com.termux/files/home/termux-init/package/pip/unrpyc-2.0.4.tar.gz#sha256=2fe85cb9395f1d6db385f19dfd7cd6f70cb54e520f8dd8e4c1393c6ba9027139
+yapf @ file:///data/data/com.termux/files/home/termux-init/package/pip/yapf-0.43.0.tar.gz#sha256=00d3aa24bfedff9420b2e0d5d9f5ab6d9d4268e72afbf59bb3fa542781d5218e

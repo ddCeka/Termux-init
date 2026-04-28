@@ -1,0 +1,193 @@
+#!/usr/bin/env bash
+# shellcheck disable=2046, 2086
+set -e
+
+SCRIPT_DIR=$(dirname "$(realpath "$0")")
+
+# To check if Termux is being used
+if [ "$(pgrep -c com.termux)" -eq 0 ]; then
+	echo "please make sure that you are using termux, this script is only made for termux"
+	exit 0
+fi
+
+if [ -n "$(command -v apt)" ]; then
+    package='apt'
+    local_package="dpkg -i $SCRIPT_DIR/package/apt/*.deb"
+elif [ -n "$(command -v pacman)" ]; then
+    package='pacman'
+    local_package="pacman -U $SCRIPT_DIR/package/pacman/*.pkg.tar.xz --noconfirm"
+fi
+
+# Colorized!
+function cecho() {
+    local code="\033["
+    case $1 in
+        black  | bk) color="${code}0;30m";;
+        red    |  r) color="${code}1;31m";;
+        green  |  g) color="${code}1;32m";;
+        yellow |  y) color="${code}1;33m";;
+        blue   |  b) color="${code}1;34m";;
+        purple |  p) color="${code}1;35m";;
+        cyan   |  c) color="${code}1;36m";;
+        gray   | gr) color="${code}0;37m";;
+        *) local text="$1"
+    esac
+    [[ $text ]] || local text="$color$2${code}0m"
+    echo -e "$text"
+}
+
+cecho g "\n► Give storage access\n"
+select strictreply in "Yes" "No"; do
+    relaxedreply=${strictreply:-$REPLY}
+    case $relaxedreply in
+        Yes | yes | y ) termux-setup-storage; break;;
+        No  | no  | n ) break;;
+    esac
+done
+
+cecho g "\n► Turn on wakelock?\n"
+select strictreply in "Yes" "No"; do
+    relaxedreply=${strictreply:-$REPLY}
+    case $relaxedreply in
+        Yes | yes | y ) termux-wake-lock; break;;
+        No  | no  | n ) break;;
+    esac
+done
+
+if [ -n "$(command -v apt)" ]; then
+    cecho g "\n► Change repo?\n"
+    select strictreply in "Yes" "No"; do
+        relaxedreply=${strictreply:-$REPLY}
+        case $relaxedreply in
+            Yes | yes | y ) termux-change-repo; break;;
+            No  | no  | n ) break;;
+        esac
+    done
+fi
+
+cecho g "\n► Start full system update?\n"
+select strictreply in "Yes" "No"; do
+    relaxedreply=${strictreply:-$REPLY}
+    case $relaxedreply in
+        Yes | yes | y ) pkg update && pkg upgrade; break;;
+        No  | no  | n ) break;;
+    esac
+done
+
+if [ -n "$(command -v apt)" ]; then
+    cecho g "\n► Add additional repository?\n"
+    select strictreply in "Yes" "No"; do
+        relaxedreply=${strictreply:-$REPLY}
+        case $relaxedreply in
+            Yes | yes | y ) pkg install -y $(cat "$SCRIPT_DIR/repo.txt" | grep -vP '^(?:\s+)?#'); break;;
+            No  | no  | n ) break;;
+        esac
+    done
+fi
+
+if [ -n "$(command -v apt)" ]; then
+    if [[ -f "$SCRIPT_DIR/tur.list" ]]; then
+        cecho r "\n► Modify repo source?\n"
+        select strictreply in "Yes" "No"; do
+            relaxedreply=${strictreply:-$REPLY}
+            case $relaxedreply in
+                Yes | yes | y ) cp "$SCRIPT_DIR/tur.list" "$PREFIX/etc/apt/sources.list.d"; pkg update && pkg upgrade -y; break;;
+                No  | no  | n ) break;;
+            esac
+        done
+    fi
+fi
+
+if [[ -f "$SCRIPT_DIR/pkg-${package}.txt" ]]; then
+    if [ -n "$(command -v apt)" ]; then
+        cecho g "\n► Install necessary packages?\n"
+        select strictreply in "Yes" "No"; do
+            relaxedreply=${strictreply:-$REPLY}
+            case $relaxedreply in
+                Yes | yes | y ) pkg install -y $(cat "$SCRIPT_DIR/pkg-${package}.txt" | grep -vP '^(?:\s+)?#'); break;;
+                No  | no  | n ) break;;
+            esac
+        done
+    elif [ -n "$(command -v pacman)" ]; then
+        cecho g "\n► Install necessary packages?\n"
+        select strictreply in "Yes" "No"; do
+            relaxedreply=${strictreply:-$REPLY}
+            case $relaxedreply in
+                Yes | yes | y ) grep -vP '^(?:\s+)?#' pkg-${package}.txt | pacman -S --noconfirm --needed -; break;;
+                No  | no  | n ) break;;
+            esac
+        done
+    fi
+fi
+
+if [[ -f "$PREFIX/bin/hashcat" ]]; then
+    cecho r "\n► Modify Hashcat LD_LIBRARY_PATH\n"
+    select strictreply in "Yes" "No"; do
+        relaxedreply=${strictreply:-$REPLY}
+        case $relaxedreply in
+            Yes | yes | y ) cp "$SCRIPT_DIR/hashcat" "$PREFIX/bin/hashcat"; break;;
+            No  | no  | n ) break;;
+        esac
+    done
+fi
+
+if [[ -f "$PREFIX/bin/7zz" ]]; then
+    cecho r "\n► Create 7z symlink?\n"
+    select strictreply in "Yes" "No"; do
+        relaxedreply=${strictreply:-$REPLY}
+        case $relaxedreply in
+            Yes | yes | y ) ln -s $PREFIX/bin/7zz $PREFIX/bin/7z; break;;
+            No  | no  | n ) break;;
+        esac
+    done
+fi
+
+cecho g "\n► Install local packages?\n"
+cecho b "► Put your package(s) into package/(apt | pacman) dir\n"
+select strictreply in "Yes" "No"; do
+    relaxedreply=${strictreply:-$REPLY}
+    case $relaxedreply in
+        Yes | yes | y ) $local_package; break;;
+        No  | no  | n ) break;;
+    esac
+done
+
+cecho g "\n► Install local python packages?\n"
+select strictreply in "Yes" "No"; do
+    relaxedreply=${strictreply:-$REPLY}
+    case $relaxedreply in
+        Yes | yes | y ) pip install -r $SCRIPT_DIR/requirements.txt; pip2 install $SCRIPT_DIR/package/pip/unrpyc-1.3.2.tar.gz; break;;
+        No  | no  | n ) break;;
+    esac
+done
+
+if [ -n "$(command -v apt)" ]; then
+    cecho g "\n► Clean packages cache?\n"
+    select strictreply in "Yes" "No"; do
+        relaxedreply=${strictreply:-$REPLY}
+        case $relaxedreply in
+            Yes | yes | y ) pkg autoclean; pkg clean; pip cache purge; break;;
+            No  | no  | n ) break;;
+        esac
+    done
+elif [ -n "$(command -v pacman)" ]; then
+    cecho g "\n► Clean packages cache?\n"
+    select strictreply in "Yes" "No"; do
+        relaxedreply=${strictreply:-$REPLY}
+        case $relaxedreply in
+            Yes | yes | y ) pacman -Scc; pip cache purge; break;;
+            No  | no  | n ) break;;
+        esac
+    done
+fi
+
+cecho g "\n► Turn off wakelock?\n"
+select strictreply in "Yes" "No"; do
+    relaxedreply=${strictreply:-$REPLY}
+    case $relaxedreply in
+        Yes | yes | y ) termux-wake-unlock; break;;
+        No  | no  | n ) break;;
+    esac
+done
+
+exit
