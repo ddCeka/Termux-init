@@ -51,7 +51,6 @@ apkeditor
 bison
 build-essential
 busybox
-cloneit
 cmake
 expac
 fakepkg

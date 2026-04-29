@@ -50,7 +50,6 @@ apkeditor
 bison
 build-essential
 busybox
-cloneit
 file
 gettext
 gh
