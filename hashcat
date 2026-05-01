@@ -1,1 +1,1 @@
-LD_LIBRARY_PATH="/vendor/lib64:/data/data/com.termux/files/usr/lib" /data/data/com.termux/files/usr/opt/hashcat/bin/hashcat "$@"
+LD_LIBRARY_PATH="/vendor/lib64:/data/data/com.termux/files/usr/opt/vendor/lib:/data/data/com.termux/files/usr/lib" /data/data/com.termux/files/usr/opt/hashcat/bin/hashcat "$@"
