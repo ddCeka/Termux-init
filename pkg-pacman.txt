@@ -63,8 +63,9 @@ git-extras
 git-lfs
 help2man
 iconv
-mono
 just
+libtool
+mono
 ninja
 nodejs-lts
 openssh
@@ -75,6 +76,7 @@ python
 python-ensurepip-wheels
 python-pip
 python2
+ruff
 rust
 termux-elf-cleaner
 update-info-dir
@@ -94,7 +96,8 @@ shellcheck
 tealdeer
 wego
 
-# Pen-testing
+# Network.
+dnslookup
 iproute2
 nmap
 whois

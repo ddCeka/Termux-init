@@ -68,6 +68,7 @@ nodejs-lts
 php
 python
 python2
+ruff
 rust
 termux-elf-cleaner
 update-info-dir
@@ -88,6 +89,7 @@ tealdeer
 wego
 
 # Pen-testing
+dnslookup
 iproute2
 nmap
 whois
