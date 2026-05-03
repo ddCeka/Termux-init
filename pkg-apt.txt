@@ -31,7 +31,6 @@ zopfli
 neovim
 micro
 ncdu2
-rumdl
 tmux
 
 # Media.
@@ -59,18 +58,17 @@ git-extras
 git-lfs
 help2man
 iconv
-just
 ldd
 llvm
 mono
 ninja
-npm
-nodejs
+nodejs-lts
 php
 python
 python2
 ruff
 rust
+termux-api
 termux-elf-cleaner
 update-info-dir
 uuid-utils
@@ -85,11 +83,13 @@ mlocate
 parallel
 qalc
 rlwrap
+rumdl
 shellcheck
 tealdeer
 wego
 
-# Pen-testing
+# Network.
+dnsutils
 dnslookup
 iproute2
 nmap

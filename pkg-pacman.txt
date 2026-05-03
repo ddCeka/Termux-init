@@ -63,7 +63,6 @@ git-extras
 git-lfs
 help2man
 iconv
-just
 libtool
 mono
 ninja
@@ -79,6 +78,7 @@ python-pip
 python2
 ruff
 rust
+termux-api
 termux-elf-cleaner
 update-info-dir
 uuid-utils
@@ -98,6 +98,7 @@ tealdeer
 wego
 
 # Network.
+dnsutils
 dnslookup
 iproute2
 nmap
