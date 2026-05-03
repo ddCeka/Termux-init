@@ -67,7 +67,8 @@ just
 libtool
 mono
 ninja
-nodejs-lts
+npm
+nodejs
 openssh
 pacman-contrib
 patchelf

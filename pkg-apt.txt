@@ -64,7 +64,8 @@ ldd
 llvm
 mono
 ninja
-nodejs-lts
+npm
+nodejs
 php
 python
 python2
