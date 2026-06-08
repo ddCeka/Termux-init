@@ -1,0 +1,4 @@
+# Insert repository you want to install here
+root-repo
+tur-repo
+# x11-repo

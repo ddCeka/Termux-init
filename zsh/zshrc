@@ -1,0 +1,191 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.config}/zsh/powerlevel10k/p10k/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then  
+    source "${XDG_CACHE_HOME:-$HOME/.config}/zsh/powerlevel10k/p10k/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+####        ####
+#### Global ####
+####        ####
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/p10k.zsh.
+() {
+    local XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.config}/zsh
+    [[ -f ~/.config/zsh/p10k.zsh ]] && source ~/.config/zsh/p10k.zsh
+}
+
+# Cd when entering just a path
+setopt auto_cd
+setopt cdablevars
+
+# Enable extended glob
+setopt extended_glob
+
+# prompt to corect typo
+setopt correct
+
+# TZ Data
+export TZ=$(getprop persist.sys.timezone)
+
+# `grep default` highlight color
+export GREP_COLORS='mt=1;32'
+
+# Editor
+editor="micro"
+export EDITOR=$editor
+export SUDO_EDITOR=$editor
+export VISUAL=$editor
+
+# set PATH so it includes custom directory if it exists
+if [[ "$(uname)" == "Linux" ]]; then
+    path+=("$HOME/bin")
+    path+=("$HOME/lib")
+    path+=("$HOME/.local/bin")
+    path+=("$HOME/.local/lib")
+    export MANPATH=":$MANPATH:$HOME/.local/share/man"
+    export LD_LIBRARY_PATH=/vendor/lib64:$PATH
+fi
+
+# SSH
+export SSH_AUTH_SOCK=$PREFIX/var/run/ssh-agent.socket
+
+# GPG
+export GPG_TTY=$TTY
+
+# Git
+export GIT_CONFIG_GLOBAL=$HOME/.config/git/gitconfig
+
+# git-cliff
+export GIT_CLIFF_CONFIG=$HOME/.config/git-cliff/cliff.toml
+
+# openjdk
+export JAVA_HOME=$PREFIX/lib/jvm/java-21-openjdk
+export PATH=$JAVA_HOME/bin:$PATH
+
+# gradle
+export GRADLE_USER_HOME=$HOME/.local/gradle
+
+# Android SDK & NDK
+export ANDROID_API_LEVEL=29
+export ANDROID_HOME=$HOME/.local/lib/android-sdk
+export ANDROID_NDK_HOME=$HOME/.local/lib/android-ndk
+export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+export PATH=$ANDROID_HOME/build-tools:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+
+# Python3
+export PYTHONPYCACHEPREFIX=$HOME/.cache/Python
+export PYTHONDONTWRITEBYTECODE=1
+
+# npm
+export npm_config_cache=$HOME/.cache/npm
+export npm_config_userconfig=$HOME/.config/npm/npmrc
+
+# cargo
+export CARGO_HOME=$HOME/.cache/cargo
+
+# udocker
+export UDOCKER_DIR=$HOME/.local/udocker
+
+# mlocate storage db
+export LOCATE_PATH="$HOME/.local/mlocate/storage.db"
+
+# Wget
+export WGETRC=$HOME/.config/wget/wgetrc
+
+# Wego
+export WEGORC=$HOME/.config/wego/wegorc
+
+# ollama
+export OLLAMA_FLASH_ATTENTION=1
+export OLLAMA_KV_CACHE_TYPE=q8_0
+export OLLAMA_MODELS="$HOME/models"
+export OLLAMA_NOHISTORY=true
+export OLLAMA_NUM_PARALLEL=2
+
+# aichat
+export AICHAT_CONFIG_DIR=$HOME/.config/aichat
+export AICHAT_CONFIG_FILE=$HOME/.config/aichat/config.yaml
+export AICHAT_ENV_FILE=$HOME/.config/aichat/env
+# export AICHAT_ROLES_DIR=
+# export AICHAT_SESSIONS_DIR=
+export AICHAT_FUNCTIONS_DIR=$HOME/data/llm-functions
+# export AICHAT_MESSAGES_FILE=
+
+# parallel
+export PARALLEL_HOME=$HOME/.config/parallel
+
+# hydra
+export HYDRA_PROXY=$HOME/.local/proxy/http.txt
+# export HYDRA_PROXY=$HOME/.local/proxy/socks4.txt
+# export HYDRA_PROXY=$HOME/.local/proxy/socks5.txt
+
+# fzf
+export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude=.git --exclude=node_modules'
+export FZF_COMPLETION_TRIGGER=','
+export FZF_DEFAULT_OPTS="
+--layout=reverse --info=inline --height=70% --multi --cycle --margin=1 --border=rounded
+--preview '([[ -f {} ]] && (bat --style=numbers --color=always --line-range=:500 {} || cat {})) || ([[ -d {} ]] \
+&& (ls -ahlT -L=2 -s=extension --group-directories-first --icons --git --git-ignore --no-user {} | less)) || echo {} 2> /dev/null | head -200'
+--prompt=' ' --pointer='' --marker='✓'
+--color='hl:148,hl+:154,prompt:blue,pointer:032,marker:010,bg+:000,gutter:000'
+--preview-window=right:60%
+--bind '?:toggle-preview'
+--bind 'ctrl-a:select-all'
+--bind 'ctrl-y:execute-silent(echo {+} | $CLIPCOPY)'
+--bind 'ctrl-e:execute($TERMINAL $EDITOR {+})+reload(fzf)'"
+export FZF_CTRL_T_COMMAND='fd -t f -HF -E=.git -E=node_modules'
+export FZF_TMUX_OPTS='-p 90%'
+
+# Colored bat
+export BAT_THEME="Visual Studio Dark+"
+
+# Colored man
+export MANPAGER="less -R --use-color -Dd+g -Du+b"
+
+# hstr get more colours
+export HSTR_CONFIG=hicolor
+
+# History file
+export HISTFILE=$HOME/.config/zsh/zsh_history
+
+# Ignored list
+export HISTORY_IGNORE="(ls|ll|la|l|bg|fg|history|hh|quit|q|clear|c|help|h|logout)"
+
+# Appearances
+export TERM="tmux-256color"
+export LANGUAGE="C.UTF-8"
+export LANG="C.UTF-8"
+export LC_ALL="C.UTF-8"
+export LC_CTYPE="C.UTF-8"
+export LC_MESSAGES="C.UTF-8"
+
+# custom completions
+fpath=("$HOME/.config/zsh/site-functions" "${fpath[@]}")
+
+# Plugins
+source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
+source $HOME/.config/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOME/.config/zsh/plugins/completion.zsh
+source $HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source $HOME/.config/zsh/plugins/history.zsh
+source $HOME/.config/zsh/plugins/key-bindings.zsh
+source $HOME/.config/zsh/plugins/you-should-use.zsh
+source $HOME/.config/zsh/plugins/zsh-assistant.zsh
+
+# Aliases
+source $HOME/.config/zsh/aliases.zsh
+
+# Functions
+source $HOME/.config/zsh/functions.zsh
+
+# Compinit
+autoload -Uz compinit
+typeset -i updated_at=$(date +'%j' -r ~/.config/zsh/zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.config/zsh/zcompdump 2>/dev/null)
+if [ $(date +'%j') != $updated_at ]; then
+    compinit -i -d $HOME/.config/zsh/zcompdump
+else
+    compinit -C -i -d $HOME/.config/zsh/zcompdump
+fi
+zmodload -i zsh/complist
