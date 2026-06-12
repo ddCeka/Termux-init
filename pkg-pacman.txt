@@ -51,7 +51,6 @@ bison
 build-essential
 busybox
 cmake
-cups-pdf
 expac
 file
 gettext
@@ -65,8 +64,7 @@ iconv
 libtool
 mono
 ninja
-nodejs
-npm
+nodejs-lts
 openssh
 openssl-1.1
 patchelf
@@ -102,21 +100,3 @@ dnslookup
 iproute2
 nmap
 whois
-
-# Neovim plugins
-python-pynvim
-tree-sitter-bash
-tree-sitter-css
-tree-sitter-go
-tree-sitter-html
-tree-sitter-java
-tree-sitter-javascript
-tree-sitter-json
-tree-sitter-latex
-tree-sitter-python
-tree-sitter-regex
-tree-sitter-rust
-tree-sitter-sql
-tree-sitter-toml
-tree-sitter-xml
-tree-sitter-yaml
