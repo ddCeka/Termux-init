@@ -1,8 +1,8 @@
 aplib @ file:///data/data/com.termux/files/home/termux-init/packages/pip/aplib-0.6.tar.gz#sha256=421ea1a4b2a9d0f3864acf1f97937152a5cd226c07956f6d763b9aee9653c518
 corrupy @ file:///data/data/com.termux/files/home/termux-init/packages/pip/corrupy-0.1.1.tar.gz#sha256=3b08a00f80a6f9bcd0c938769ef3352f1126627805d26fa1e4f42865a4035784
 epy-reader @ file:///data/data/com.termux/files/home/termux-init/packages/pip/epy_reader-2023.6.11.tar.gz#sha256=81e979d377bc0d78eb3092bd969019e86c50b2b6a1297f928e2c91c0a6e22546
-megaloader @ file:///data/data/com.termux/files/home/termux-init/packages/pip/megaloader-0.1.0.tar.gz#sha256=6770efe27d176db91420f46f7776c2b0af583071fb6d0f5cfa759e87138dfdbe
-megaloader-cli @ file:///data/data/com.termux/files/home/termux-init/packages/pip/megaloader_cli-0.1.0.tar.gz#sha256=81e4974eeae1a270d95ba06398ed0b7c85c5fa0c8f3ebd6e3982654655f6f0ea
+megaloader @ file:///data/data/com.termux/files/home/termux-init/packages/pip/megaloader-0.2.0.tar.gz#sha256=4ec81bac068a0dd4c73c22e1a459b4d6777bd6bb1f6aa83a51b55a33e1b16ecc
+megaloader-cli @ file:///data/data/com.termux/files/home/termux-init/packages/pip/megaloader_cli-0.2.0.tar.gz#sha256=2437588906a2ab762e06328f864b41abd7ec8d3380bc94fea22c996543e79bda
 passlib @ file:///data/data/com.termux/files/home/termux-init/packages/pip/passlib-1.7.4.tar.gz#sha256=defd50f72b65c5402ab2c573830a6978e5f202ad0d984793c8dde2c4152ebe04
 pefile @ file:///data/data/com.termux/files/home/termux-init/packages/pip/pefile-2024.8.26.tar.gz#sha256=3ff6c5d8b43e8c37bb6e6dd5085658d658a7a0bdcd20b6a07b1fcfc1c4e9d632
 unrpyc @ file:///data/data/com.termux/files/home/termux-init/packages/pip/unrpyc-2.0.4.tar.gz#sha256=2fe85cb9395f1d6db385f19dfd7cd6f70cb54e520f8dd8e4c1393c6ba9027139

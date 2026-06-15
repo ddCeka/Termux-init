@@ -61,6 +61,7 @@ git-extras
 git-lfs
 help2man
 iconv
+lazygit
 libtool
 mono
 ninja
@@ -91,7 +92,6 @@ qalc
 rlwrap
 shellcheck
 tealdeer
-ttf-nerd-fonts-symbols
 wego
 
 # Network.
