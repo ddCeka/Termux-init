@@ -74,6 +74,8 @@ alias ......='cd ../../../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 alias .6='cd ../../../../../../'
+alias .7='cd ../../../../../../../'
+alias .8='cd ../../../../../../../../'
 alias cdusr='cd $PREFIX'
 alias mkdir='mkdir -p -v'
 alias rmd='rm -rfv'
@@ -81,7 +83,7 @@ alias cpv='cp --preserve=all -v'
 alias cpr='cp --preserve=all -R'
 alias rsync='rsync -ahW --info=progress2'
 alias cs='printf "\033c"'
-alias lincol='echo -e "lines\ncols"|tput -S'
+alias lincol='echo -e "lines\ncols" | tput -S'
 alias preview="fzf --preview='bat --squeeze-blank --color=always --style=full {}' --preview-window=down"
 alias q='clear && exit'
 alias logout='pkill termux'
@@ -96,11 +98,7 @@ alias ht='htop'
 # Backup stuff
 alias tbkp='tar -czvf /storage/emulated/0/AppManager/bootstrap/home-backup.tar.xz -C /data/data/com.termux/files ./home'
 alias trstr='tar -xzvf /storage/emulated/0/AppManager/bootstrap/home-backup.tar.xz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions'
-if [ -n "$(command -v apt)" ]; then
-    alias etcb='cd $PREFIX/etc && tar czvf etcb.tar.xz motd profile termux-login.sh zshrc && mv etcb.tar.xz $HOME/bootstrap && cd $HOME'
-elif [ -n "$(command -v pacman)" ]; then
-    alias etcb='cd $PREFIX/etc && tar czvf etcb.tar.xz motd pacman.conf profile termux-login.sh zshrc && mv etcb.tar.xz $HOME/bootstrap && cd $HOME'
-fi
+alias etcb='cd $PREFIX/etc && tar czvf etcb.tar.xz motd profile termux-login.sh && mv etcb.tar.xz $HOME/bootstrap && cd $HOME'
 
 # Calender
 alias jan='cal -m January'
@@ -129,9 +127,10 @@ alias papc='pkg autoclean && pkg clean'
 # Package manager specific
 if [ -n "$(command -v apt)" ]; then
     alias pkguc='pkg update && apt list --upgradable -a'
-    alias pupg='pkg update && pkg upgrade -y'
+    alias pupg='pkg update && pkg upgrade'
     alias create-pack='termux-create-package'
     alias crepo='termux-change-repo'
+    alias listpkgbysize="dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -n"
 elif [ -n "$(command -v pacman)" ]; then
     alias create-pack='makepkg -fcsi' # Make package from PKGBUILD file in current directory.
     alias paconf="$editor '$PREFIX/etc/pacman.conf'"
@@ -151,7 +150,6 @@ elif [ -n "$(command -v pacman)" ]; then
     alias pacinde='pacman -S --asdeps' # Install given package(s) as dependencies of another package.
     alias pacclean='pacman -Sc' # Delete all not currently installed package files.
     alias pacpurge='pacman -Scc' # Delete all cache package files and clean up database repository.
-    alias browsepkg="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse --bind 'enter:execute(pacman -Si {} | less)'"
     alias listpkgdepend="expac -S '%D'"
     alias listpkgopti="expac -S '%o'"
     alias listpkgbysize="expac -H M '%m\t%n' | sort -h"
@@ -171,7 +169,8 @@ alias open='termux-open-url'
 alias lock='termux-wake-lock'
 alias unlock='termux-wake-unlock'
 alias cleaner='termux-junk-cleaner'
-alias ddl='dead-domains-linter'
+alias createc='create-conventional-changelog'
+alias ddl='dead-domains-linter.sh'
 alias unrpall='unrpa -v *.rpa && rm *.rpa'
 
 # Applications shortcuts
@@ -179,7 +178,7 @@ alias tprop="$editor '$HOME/.termux/termux.properties'"
 alias cclean="rm -rf $HOME/.cache"
 alias bclean="rm -rf $HOME/build && mkdir build"
 alias pclean='killall -9 com.termux.api gpg-agent pulseaudio ssh-agent termux-wake-lock'
-alias ezshrc="$editor '$HOME/.config/zsh/.zshrc'"
+alias ezshrc="$editor '$HOME/.zshrc'"
 alias ezshal="$editor '$HOME/.config/zsh/aliases.zsh'"
 alias ezshfu="$editor '$HOME/.config/zsh/functions.zsh'"
 alias timenow='date +"%R"'
@@ -187,6 +186,7 @@ alias datenow='date +"%A,%d %b %m %Y"'
 alias untar='tar xzvf'
 alias ctar='tar czvf'
 alias c7z='for i in *; do 7zz a -t7z "${i%.*}.7z" -m0=lzma2 -mx=9 -aoa "$i"; done'
+alias sav7z='7z a -t7z "saves.7z" -m0=lzma2 -mx=9 -aoa "saves"'
 alias convimg='for img in *.jpg; do magick convert -regard-warnings -resize 20% "$img" "output-$img"; done'
 alias wget='wget -c'
 alias e="$editor"
@@ -215,7 +215,9 @@ alias githem="$editor '$HOME/.config/git/gitconfig.themes'"
 alias me="$editor 'README.md'"
 alias rdm='cat README.md'
 alias cglg='cat CHANGELOG.md'
-alias ccc='create-conventional-changelog'
+alias lg='lazygit'
+alias commit-date="git log -1 --format=%cs | sed 's/-/./g'"
+alias commit-sha="find . -type f ! -path '*/.git/*' -print0 | xargs -0 sha256sum | LC_ALL=C sort | sha256sum"
 alias ga="git add"
 alias gc="git commit -m"
 alias gca="git commit --all -m"
@@ -247,6 +249,3 @@ alias gmx="git merge -X ours"
 alias greb="git rebase --interactive --autostash --keep-empty --no-autosquash --rebase-merges main"
 alias gsv="git status -v"
 alias gtop='cd "$(git rev-parse --show-toplevel)"'
-# https://spencer.wtf/2026/02/20/cleaning-up-merged-git-branches-a-one-liner-from-the-cias-leaked-dev-docs.html
-alias ciaclean-main='git branch --merged origin/main | grep -vE "^\s*(\*|main|develop)" | xargs -n 1 git branch -d'
-alias ciaclean-master='git branch --merged origin/master | grep -vE "^\s*(\*|master|develop)" | xargs -n 1 git branch -d'

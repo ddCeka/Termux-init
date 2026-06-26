@@ -81,6 +81,7 @@ cat << 'EOF' >> ~/.zshrc
 # Custom additions (Termux)
 source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
 source $HOME/.config/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOME/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
 source $HOME/.config/zsh/plugins/completion.zsh
 source $HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source $HOME/.config/zsh/plugins/history.zsh

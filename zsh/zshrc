@@ -5,15 +5,15 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.config}/zsh/powerlevel10k/p10k/p10k-instant-p
     source "${XDG_CACHE_HOME:-$HOME/.config}/zsh/powerlevel10k/p10k/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-####        ####
-#### Global ####
-####        ####
-
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/p10k.zsh.
 () {
     local XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.config}/zsh
     [[ -f ~/.config/zsh/p10k.zsh ]] && source ~/.config/zsh/p10k.zsh
 }
+
+####        ####
+#### Global ####
+####        ####
 
 # Cd when entering just a path
 setopt auto_cd
@@ -24,6 +24,9 @@ setopt extended_glob
 
 # prompt to corect typo
 setopt correct
+
+# promt to confirmation after rm
+setopt rm_star_wait
 
 # TZ Data
 export TZ=$(getprop persist.sys.timezone)
@@ -83,7 +86,7 @@ export npm_config_cache=$HOME/.cache/npm
 export npm_config_userconfig=$HOME/.config/npm/npmrc
 
 # cargo
-export CARGO_HOME=$HOME/.cache/cargo
+export CARGO_HOME=$HOME/.local/cargo
 
 # udocker
 export UDOCKER_DIR=$HOME/.local/udocker
@@ -99,19 +102,16 @@ export WEGORC=$HOME/.config/wego/wegorc
 
 # ollama
 export OLLAMA_FLASH_ATTENTION=1
-export OLLAMA_KV_CACHE_TYPE=q8_0
+export OLLAMA_KV_CACHE_TYPE="q8_0"
 export OLLAMA_MODELS="$HOME/models"
-export OLLAMA_NOHISTORY=true
+export OLLAMA_NOHISTORY="true"
 export OLLAMA_NUM_PARALLEL=2
 
 # aichat
 export AICHAT_CONFIG_DIR=$HOME/.config/aichat
 export AICHAT_CONFIG_FILE=$HOME/.config/aichat/config.yaml
 export AICHAT_ENV_FILE=$HOME/.config/aichat/env
-# export AICHAT_ROLES_DIR=
-# export AICHAT_SESSIONS_DIR=
 export AICHAT_FUNCTIONS_DIR=$HOME/data/llm-functions
-# export AICHAT_MESSAGES_FILE=
 
 # parallel
 export PARALLEL_HOME=$HOME/.config/parallel
@@ -138,9 +138,6 @@ export FZF_DEFAULT_OPTS="
 export FZF_CTRL_T_COMMAND='fd -t f -HF -E=.git -E=node_modules'
 export FZF_TMUX_OPTS='-p 90%'
 
-# Colored bat
-export BAT_THEME="Visual Studio Dark+"
-
 # Colored man
 export MANPAGER="less -R --use-color -Dd+g -Du+b"
 
@@ -151,7 +148,7 @@ export HSTR_CONFIG=hicolor
 export HISTFILE=$HOME/.config/zsh/zsh_history
 
 # Ignored list
-export HISTORY_IGNORE="(ls|ll|la|l|bg|fg|history|hh|quit|q|clear|c|help|h|logout)"
+export HISTORY_IGNORE="(ls|ll|la|l|bg|fg|history|hh|quit|q|clear|c|help|h|logout|exit)"
 
 # Appearances
 export TERM="tmux-256color"
@@ -162,11 +159,12 @@ export LC_CTYPE="C.UTF-8"
 export LC_MESSAGES="C.UTF-8"
 
 # custom completions
-fpath=("$HOME/.config/zsh/site-functions" "${fpath[@]}")
+fpath=("$HOME/.local/share/scripts/site-functions" "${fpath[@]}")
 
 # Plugins
 source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
 source $HOME/.config/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOME/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
 source $HOME/.config/zsh/plugins/completion.zsh
 source $HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source $HOME/.config/zsh/plugins/history.zsh

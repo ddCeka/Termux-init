@@ -25,6 +25,7 @@ function sortads() {
                 No  | no  | n ) return 1;;
             esac
         done
+        rm ads.txt
     fi
 }
 function sortads2() {
@@ -42,6 +43,7 @@ function sortads2() {
                 No  | no  | n ) return 1;;
             esac
         done
+        rm filter.txt
     fi
 }
 
@@ -203,9 +205,24 @@ function ownedpkg() {
     fi
 }
 
+# packages browser
+function browsepkg() {
+    if [ -n "$(command -v apt)" ]; then
+        apt-cache pkgnames | fzf --multi --cycle --layout=reverse \
+        --preview "apt-cache show {}" --preview-window=:60% \
+        --bind=space:toggle-preview | xargs -ro apt install
+    elif [ -n "$(command -v pacman)" ]; then
+        pacman -Slq | fzf --multi --cycle --layout=reverse \
+        --preview 'pacman -Si {}' --preview-window=:60% \
+        --bind='enter:execute(pacman -Si {} | less)'
+    else
+        return 1
+    fi
+}
+
 # Find largest file
 function flf() {
-    du -h -x -s -- * | sort -r -h | head -20;
+    du -h -x -s -- * | sort -r -h | head -20
 }
 
 # Find large files
@@ -329,7 +346,7 @@ function gg() {
         echo "  p, [push] <branch>"
         echo "     [i] Pull files"
         echo "  P, [pull] <branch> [--force]"
-        echo "     [i] Merge devel branch on master"
+        echo "     [i] Merge develop branch on master"
         echo "  r, [release]"
         echo "     [i] Update all submodules on branch"
         echo "  s, [submodule]"
@@ -382,13 +399,13 @@ function gg() {
             check_branch=$(git branch | grep "$2")
             case $2 in
                 feature)
-                    check_devel_branch=$(git branch | grep devel)
-                    if [[ -z $check_devel_branch ]]; then
-                        echo "[i] creating devel branch..."
-                        git branch devel
-                        git push origin devel
+                    check_dev_branch=$(git branch | grep dev)
+                    if [[ -z $check_dev_branch ]]; then
+                        echo "[i] creating develop branch..."
+                        git branch dev
+                        git push origin dev
                     fi
-                    git checkout -b feature --track origin/devel
+                    git checkout -b feature --track origin/dev
                     ;;
                 hotfix)
                     git checkout -b hotfix master
@@ -442,19 +459,19 @@ function gg() {
                 ;;
                 feature)
                     if [[ -n $check_branch ]]; then
-                        git checkout devel
-                        git difftool --no-gui -d devel..feature
+                        git checkout dev
+                        git difftool --no-gui -d dev..feature
                         git merge --no-ff feature
                         git branch -d feature
                         git commit -am "${3}"
                     else
-                        echo "[✘] no devel branch found."
+                        echo "[✘] no develop branch found."
                     fi
                     ;;
                 hotfix)
                     if [[ -n $check_branch ]]; then
                         # get upstream branch
-                        git checkout -b devel origin
+                        git checkout -b dev origin
                         git merge --no-ff hotfix
                         git commit -am "hotfix: v${3}"
                         # get master branch
@@ -476,7 +493,7 @@ function gg() {
                         git branch -d $2
                         git commit -am "${3}"
                     else
-                        echo "[✘] no devel branch found."
+                        echo "[✘] no develop branch found."
                     fi
                     ;;
             esac
@@ -494,16 +511,30 @@ function gg() {
             ;;
         r | release )
             git checkout origin/master
-            git merge --no-ff origin/devel
+            git merge --no-ff origin/dev
             git tag -a $2 -m "release: v${2}"
             git push --tags
             ;;
         s | submodule )
             git submodule foreach git pull origin master
             ;;
-        * | h | help )
+        h | help )
             usage
     esac
+}
+
+# https://spencer.wtf/2026/02/20/cleaning-up-merged-git-branches-a-one-liner-from-the-cias-leaked-dev-docs.html
+function ciaclean() {
+    local branch="$1"
+    if [[ -z "$branch" ]]; then
+        echo "[✘] Usage: input master or main branch"
+        return 1
+    fi
+    
+    echo "[i] Cleaning merged git $branch"
+    git branch --merged origin/${branch} \
+        | grep -vE "^\s*(\*|${branch}|dev)" \
+        | xargs -n 1 git branch -d
 }
 
 # Cloning termux repository
