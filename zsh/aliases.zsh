@@ -98,7 +98,7 @@ alias ht='htop'
 # Backup stuff
 alias tbkp='tar -czvf /storage/emulated/0/AppManager/bootstrap/home-backup.tar.xz -C /data/data/com.termux/files ./home'
 alias trstr='tar -xzvf /storage/emulated/0/AppManager/bootstrap/home-backup.tar.xz -C /data/data/com.termux/files --recursive-unlink --preserve-permissions'
-alias etcb='cd $PREFIX/etc && tar czvf etcb.tar.xz motd profile termux-login.sh && mv etcb.tar.xz $HOME/bootstrap && cd $HOME'
+alias etcb='cd $PREFIX/etc && tar czvf etcb.tar.xz motd termux-login.sh && mv etcb.tar.xz $HOME/bootstrap && cd $HOME'
 
 # Calender
 alias jan='cal -m January'

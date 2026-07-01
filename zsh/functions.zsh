@@ -1339,3 +1339,13 @@ function convert-mkv() {
     find "$folder" -type f -iname "*.mp4" -o -iname "*.mov" -o -iname "*.avi" -o -iname "*.mkv" | parallel ffmpeg -i {} -c:v copy -c:a copy -map_metadata -1 {.}.mkv &&
     echo "[✔] $folder converted"
 }
+
+# Unpack renpy pack archive(s)
+function unrpaex() {
+    if [ -n "$(command -v unrpa)" ]; then
+        unrpa -v "$1" && rm "$1"
+    else
+        echo "[✘] Usage: unrpaex <filename.rpa>"
+        echo "[i] Install unrpa package"
+    fi
+}
