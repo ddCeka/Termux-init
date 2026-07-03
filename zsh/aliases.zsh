@@ -171,8 +171,6 @@ alias unlock='termux-wake-unlock'
 alias cleaner='termux-junk-cleaner'
 alias createc='create-conventional-changelog'
 alias ddl='dead-domains-linter.sh'
-alias tetris='tetro-tui'
-alias cvecli='cvecli.py'
 
 # Applications shortcuts
 alias tprop="$editor '$HOME/.termux/termux.properties'"
