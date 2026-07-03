@@ -71,6 +71,12 @@ function betterfox() {
     aria2c -d $HOME/.local/firefox -i $HOME/.local/firefox/betterfox.txt --max-concurrent-downloads 4
 }
 
+# Update git-filter-repo script
+function update-gfr() {
+    rm $HOME/bin/git-filter-repo ;
+    curl -fsSL -o $HOME/bin/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo
+}
+
 # Countfiles in directory
 function countfiles() {
     for t in files links directories ; do 
@@ -322,34 +328,32 @@ function fkill() {
 function gg() {
     usage(){
         echo "  [i] Usage: gg [options]"
-        echo "  [i] Show this help usage"
-        echo "  h, help"
-        echo -e "\n"
-        echo "  [i] Autoconfigure git options"
-        echo "  --init"
-        echo -e "\n"
-        echo "     [i] Add git files"
-        echo "  a, [add] <files> [--all]"
-        echo "     [i] Create commit messages"
-        echo "  c, [commit] <text> [--undo]"
-        echo "     [i] Cherry-pick commit"
-        echo "  C, [cherry-pick] <number> <url> [branch]"
-        echo "     [i] Add/Change Branch"
-        echo "  b, [branch] feature|hotfix|<name>"
-        echo "     [i] Delete Branch"
-        echo "  d, [delete] <branch>"
-        echo "     [i] Display Log"
-        echo "  l, [log]"
-        echo "     [i] Merge branches"
-        echo "  m, [merge] feature|hotfix|<name> <commit>|<version>"
-        echo "     [i] Push files"
-        echo "  p, [push] <branch>"
-        echo "     [i] Pull files"
-        echo "  P, [pull] <branch> [--force]"
-        echo "     [i] Merge develop branch on master"
-        echo "  r, [release]"
-        echo "     [i] Update all submodules on branch"
-        echo "  s, [submodule]"
+        echo "  "
+        echo "  h, help                                 [i] Show this help usage"
+        echo "  "
+        echo "  --init                             [i] Autoconfigure git options"
+        echo "  "
+        echo "  a, [add] <files> [--all]                       [i] Add git files"
+        echo "  "
+        echo "  c, [commit] <text> [--undo]           [i] Create commit messages"
+        echo "  "
+        echo "  C, [cherry-pick] <number> <url> [branch]  [i] Cherry pick commit"
+        echo "  "
+        echo "  b, [branch] feature|hotfix|<name>          [i] Add/Change Branch"
+        echo "  "
+        echo "  d, [delete] <branch>                           [i] Delete Branch"
+        echo "  "
+        echo "  l, [log]                                         [i] Display Log"
+        echo "  "
+        echo "  m, [merge] feature|hotfix|<name> <commit>|<version>    [i] Merge"
+        echo "  "
+        echo "  p, [push] <branch>                                [i] Push files"
+        echo "  "
+        echo "  P, [pull] <branch> [--force]                      [i] Pull files"
+        echo "  "
+        echo "  r, [release]                  [i] Merge develop branch on master"
+        echo "  "
+        echo "  s, [submodule]               [i] Update all submodules on branch"
     return 1
     }
     case $1 in
@@ -518,7 +522,7 @@ function gg() {
         s | submodule )
             git submodule foreach git pull origin master
             ;;
-        h | help )
+        * | h | help )
             usage
     esac
 }
@@ -1137,6 +1141,13 @@ function ex() {
             return 1
         }
         ;;
+    *.rpa)
+        echo "[✔] Extracting rpa archive: $archive"
+        (cd "$archive_dir" && unrpa "$archive_name" && rm "$archive_name") || {
+            echo "[✘] Failed to extract $archive"
+            return 1
+        }
+        ;;
     *)
         (cd "$archive_dir" && 7z x "$archive_name") || {
             echo "[✘] Failed to extract $archive"
@@ -1144,7 +1155,7 @@ function ex() {
             echo "    Tar: .tar, .tar.gz/.tgz, .tar.xz/.txz, .tar.bz2/.tbz2/.tbz"
             echo "    Tar: .tar.Z/.tZ, .tar.lz/.tlz, .tar.lzma, .tar.lzo, .tar.zst/.tzst"
             echo "    Compressed: .gz, .bz2, .xz, .lzma, .Z, .lz, .lzo, .zst"
-            echo "    Archives: .zip, .7z, .rar, .ace, .arj, .cab, .lha/.lzh"
+            echo "    Archives: .zip, .7z, .rar, .ace, .arj, .cab, .lha/.lzh, .rpa"
             echo "    Packages: .rpm, .deb, .jar, .war, .ear, .apk"
             echo "    Other: .iso, .cpio, .shar, .a"
             return 1
@@ -1219,6 +1230,15 @@ function compact() {
     fi
 }
 
+# Quick compress into 7z
+function c7z() {
+    for i in * ; do
+        7z a -t7z "${i%.*}.7z" -m0=lzma2 -mx=9 -aoa "$i" ; done
+}
+function sav7z() {
+    7z a -t7z "saves.7z" -m0=lzma2 -mx=9 -aoa "saves"
+}
+
 # updates all package managers installed, lists updated packages, counts, and disk usage
 function uall() {
     echo "[i] Starting update-all..."
@@ -1284,6 +1304,12 @@ function note() {
     fi
 }
 
+# Converts jpg files and resize by 20%
+function convimg() {
+    for img in *.jpg ; do
+        magick convert -regard-warnings -resize 20% "$img" "output-$img" ; done
+}
+
 # Transcode any image to compressed-but-lossless PNG
 function convert-to-png() {
     magick "$1" -strip -define png:compression-filter=5 \
@@ -1338,14 +1364,4 @@ function convert-mkv() {
     echo "[i] Converting $folder"
     find "$folder" -type f -iname "*.mp4" -o -iname "*.mov" -o -iname "*.avi" -o -iname "*.mkv" | parallel ffmpeg -i {} -c:v copy -c:a copy -map_metadata -1 {.}.mkv &&
     echo "[✔] $folder converted"
-}
-
-# Unpack renpy pack archive(s)
-function unrpaex() {
-    if [ -n "$(command -v unrpa)" ]; then
-        unrpa -v "$1" && rm "$1"
-    else
-        echo "[✘] Usage: unrpaex <filename.rpa>"
-        echo "[i] Install unrpa package"
-    fi
 }

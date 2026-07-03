@@ -171,7 +171,8 @@ alias unlock='termux-wake-unlock'
 alias cleaner='termux-junk-cleaner'
 alias createc='create-conventional-changelog'
 alias ddl='dead-domains-linter.sh'
-alias unrpall='unrpa -v *.rpa && rm *.rpa'
+alias tetris='tetro-tui'
+alias cvecli='cvecli.py'
 
 # Applications shortcuts
 alias tprop="$editor '$HOME/.termux/termux.properties'"
@@ -185,9 +186,6 @@ alias timenow='date +"%R"'
 alias datenow='date +"%A,%d %b %m %Y"'
 alias untar='tar xzvf'
 alias ctar='tar czvf'
-alias c7z='for i in *; do 7zz a -t7z "${i%.*}.7z" -m0=lzma2 -mx=9 -aoa "$i"; done'
-alias sav7z='7z a -t7z "saves.7z" -m0=lzma2 -mx=9 -aoa "saves"'
-alias convimg='for img in *.jpg; do magick convert -regard-warnings -resize 20% "$img" "output-$img"; done'
 alias wget='wget -c'
 alias e="$editor"
 alias sddb='updatedb --database-root /storage/emulated/0/ --output $HOME/.local/mlocate/storage.db'
@@ -200,7 +198,6 @@ alias apksigner='apksigner sign --ks $HOME/.keystore/sign.keystore'
 alias zipalcv='zipalign -c -v 4'
 alias qalc='qalc -color'
 alias aria='aria2c'
-alias tetris='tetro-tui'
 alias localb='git -C $HOME/build pull'
 alias decolorize='sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,3})*)?[mGK]//g"'
 alias wifikey='sudo grep -r "string name=" /data/misc/wifi/WifiConfigStore.xml' # Each phone different.
@@ -216,6 +213,7 @@ alias me="$editor 'README.md'"
 alias rdm='cat README.md'
 alias cglg='cat CHANGELOG.md'
 alias lg='lazygit'
+alias gfr='git-filter-repo'
 alias commit-date="git log -1 --format=%cs | sed 's/-/./g'"
 alias commit-sha="find . -type f ! -path '*/.git/*' -print0 | xargs -0 sha256sum | LC_ALL=C sort | sha256sum"
 alias ga="git add"

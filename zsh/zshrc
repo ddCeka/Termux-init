@@ -86,7 +86,7 @@ export npm_config_cache=$HOME/.cache/npm
 export npm_config_userconfig=$HOME/.config/npm/npmrc
 
 # cargo
-export CARGO_HOME=$HOME/.local/cargo
+export CARGO_HOME=$HOME/.cache/cargo
 
 # udocker
 export UDOCKER_DIR=$HOME/.local/udocker
@@ -118,8 +118,8 @@ export PARALLEL_HOME=$HOME/.config/parallel
 
 # hydra
 export HYDRA_PROXY=$HOME/.local/proxy/http.txt
-# export HYDRA_PROXY=$HOME/.local/proxy/socks4.txt
-# export HYDRA_PROXY=$HOME/.local/proxy/socks5.txt
+#export HYDRA_PROXY=$HOME/.local/proxy/socks4.txt
+#export HYDRA_PROXY=$HOME/.local/proxy/socks5.txt
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude=.git --exclude=node_modules'
