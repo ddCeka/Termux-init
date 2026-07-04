@@ -42,8 +42,10 @@ megatools
 monolith
 
 # Development (tools).
-apksigner
+aapt2
 apkeditor
+apksigner
+apktool
 bison
 build-essential
 busybox

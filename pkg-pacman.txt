@@ -44,9 +44,12 @@ monolith
 # Development (tools).
 autoconf
 automake
-apksigner
+aapt2
 apkeditor
+apksigner
+apktool
 bc
+binutils
 bison
 build-essential
 busybox

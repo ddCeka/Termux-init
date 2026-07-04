@@ -454,7 +454,7 @@ function gg() {
             fi
             ;;
         l | log )
-            git log --oneline --decorate --pretty=custom -n 15
+            git log --oneline --decorate --pretty=custom -n 16
             ;;
         m | merge )
             check_branch=$(git branch | grep "$2")
