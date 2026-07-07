@@ -19,8 +19,8 @@ backup_file() {
 # Update & Install Packages (Termux)
 #===========================================================
 msg "Updating packages"
-pkg update -y >/dev/null
-pkg upgrade -y >/dev/null
+pkg update >/dev/null
+pkg upgrade >/dev/null
 
 #===========================================================
 # Ensure directories
@@ -59,7 +59,7 @@ msg "Installing plugins"
 git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ~/.config/zsh/plugins/fast-syntax-highlighting >/dev/null 2>&1
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.config/zsh/plugins/zsh-autosuggestions >/dev/null 2>&1
 # this package also exist on termux-packages, idk which is more updated
-git clone https://github.com/zsh-users/zsh-completions.git ~/.config/zsh/plugins/zsh-completions >/dev/null 2>&1
+#git clone https://github.com/zsh-users/zsh-completions.git ~/.config/zsh/plugins/zsh-completions >/dev/null 2>&1
 
 curl -fsSL -o ~/.config/zsh/plugins/completion.zsh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/completion.zsh
 curl -fsSL -o ~/.config/zsh/plugins/history.zsh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/history.zsh

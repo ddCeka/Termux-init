@@ -80,6 +80,7 @@ python-ensurepip-wheels
 python-pip
 python2
 python-lxml
+python-yt-dlp
 termux-api
 termux-elf-cleaner
 update-info-dir

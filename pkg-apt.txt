@@ -21,6 +21,7 @@ zsh-completions
 
 # Archiving/compression utilities.
 7zip
+bsdtar
 lz4
 lzip
 lzop
@@ -49,7 +50,6 @@ apktool
 bison
 build-essential
 busybox
-cups-pdf
 file
 gettext
 gh
@@ -60,7 +60,6 @@ git-lfs
 help2man
 iconv
 lazygit
-ldd
 llvm
 mono
 ninja
@@ -73,7 +72,7 @@ php
 python
 python2
 python-lxml
-python-pynvim
+python-yt-dlp
 termux-api
 termux-elf-cleaner
 update-info-dir

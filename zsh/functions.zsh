@@ -17,7 +17,7 @@ function sortads() {
     rm ads1.txt ads2.txt ads3.txt \
        ads4.txt ads5.txt ads6.txt ;
     if [ -n "$(command -v dead-domains-linter)" ]; then
-        echo -e "\n [i] Use linter?"
+        echo -e "\n[i] Use linter?"
         select strictreply in "Yes" "No"; do
         relaxedreply=${strictreply:-$REPLY}
             case $relaxedreply in
@@ -35,7 +35,7 @@ function sortads2() {
     rm filter1.txt filter2.txt filter3.txt \
        filter4.txt filter5.txt filter6.txt ;
     if [ -n "$(command -v dead-domains-linter)" ]; then
-        echo -e "\n [i] Use linter?"
+        echo -e "\n[i] Use linter?"
         select strictreply in "Yes" "No"; do
         relaxedreply=${strictreply:-$REPLY}
             case $relaxedreply in
@@ -72,10 +72,17 @@ function betterfox() {
 }
 
 # Update git-filter-repo script
-function update-gfr() {
+function upd-gfr() {
     rm $HOME/bin/git-filter-repo ;
     curl -fsSL -o $HOME/bin/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo ;
     chmod +x $HOME/bin/git-filter-repo
+}
+
+# Update fastget script
+function upd-fg() {
+    rm $HOME/bin/fastget ;
+    curl -fsSL -o $HOME/bin/fastget https://raw.githubusercontent.com/rhcp011235/fastget/refs/heads/main/fastget ;
+    chmod +x $HOME/bin/fastget
 }
 
 # Countfiles in directory
