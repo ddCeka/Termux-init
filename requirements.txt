@@ -1,6 +1,6 @@
 aplib @ file:///data/data/com.termux/files/home/termux-init/packages/pip/aplib-0.6.tar.gz#sha256=421ea1a4b2a9d0f3864acf1f97937152a5cd226c07956f6d763b9aee9653c518
 corrupy @ file:///data/data/com.termux/files/home/termux-init/packages/pip/corrupy-0.1.1.tar.gz#sha256=3b08a00f80a6f9bcd0c938769ef3352f1126627805d26fa1e4f42865a4035784
-epy-reader @ file:///data/data/com.termux/files/home/termux-init/packages/pip/epy_reader-2023.6.11.tar.gz#sha256=81e979d377bc0d78eb3092bd969019e86c50b2b6a1297f928e2c91c0a6e22546
+epy @ file:///data/data/com.termux/files/home/termux-init/packages/pip/epy-2026.7.7.tar.gz#sha256=3f79b5ed9a36912b36ac1befd95e6cba018450e4c78763f7270385b27dd69afd
 passlib @ file:///data/data/com.termux/files/home/termux-init/packages/pip/passlib-1.7.4.tar.gz#sha256=defd50f72b65c5402ab2c573830a6978e5f202ad0d984793c8dde2c4152ebe04
 pefile @ file:///data/data/com.termux/files/home/termux-init/packages/pip/pefile-2024.8.26.tar.gz#sha256=3ff6c5d8b43e8c37bb6e6dd5085658d658a7a0bdcd20b6a07b1fcfc1c4e9d632
 standard-imghdr @ file:///data/data/com.termux/files/home/termux-init/packages/pip/standard_imghdr-3.13.0.tar.gz#sha256=8d9c68058d882f6fc3542a8d39ef9ff94d2187dc90bd0c851e0902776b7b7a42
