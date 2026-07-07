@@ -10,41 +10,26 @@ function cd() {
 }
 
 # dead domains linter
-function sortads() {
+function ads1() {
+    "ads1.php" ;
     sort ads1.txt ads2.txt ads3.txt \
          ads4.txt ads5.txt ads6.txt \
          -u >> ads.txt ;
     rm ads1.txt ads2.txt ads3.txt \
-       ads4.txt ads5.txt ads6.txt ;
-    if [ -n "$(command -v dead-domains-linter)" ]; then
-        echo -e "\n[i] Use linter?"
-        select strictreply in "Yes" "No"; do
-        relaxedreply=${strictreply:-$REPLY}
-            case $relaxedreply in
-                Yes | yes | y ) dead-domains-linter -a -i ads.txt; sort -u ads.txt >> update; echo "[i] Done"; break;;
-                No  | no  | n ) return 1;;
-            esac
-        done
-        rm ads.txt
-    fi
+       ads4.txt ads5.txt ads6.txt
 }
-function sortads2() {
+function ads2() {
+    "ads2.php" ;
     sort filter1.txt filter2.txt filter3.txt \
          filter4.txt filter5.txt filter6.txt \
          -u >> filter.txt ;
+    diff -uNr ublock.txt filter.txt > diff.patch ;
+    cp ublock.txt temp.txt ;
+    patch < diff.patch temp.txt ;
+    sort temp -u >> update2 ;
     rm filter1.txt filter2.txt filter3.txt \
-       filter4.txt filter5.txt filter6.txt ;
-    if [ -n "$(command -v dead-domains-linter)" ]; then
-        echo -e "\n[i] Use linter?"
-        select strictreply in "Yes" "No"; do
-        relaxedreply=${strictreply:-$REPLY}
-            case $relaxedreply in
-                Yes | yes | y ) dead-domains-linter -a -i filter.txt; sort -u filter.txt >> update2; echo "[i] Done"; break;;
-                No  | no  | n ) return 1;;
-            esac
-        done
-        rm filter.txt
-    fi
+       filter4.txt filter5.txt filter6.txt \
+       filter.txt temp.txt
 }
 
 # Dead domain checker

@@ -85,7 +85,7 @@ cecho g "\n► Start full system update?\n"
 select strictreply in "Yes" "No"; do
     relaxedreply=${strictreply:-$REPLY}
     case $relaxedreply in
-        Yes | yes | y ) pkg update && pkg upgrade; break;;
+        Yes | yes | y ) pkg update && pkg upgrade -y; break;;
         No  | no  | n ) break;;
     esac
 done
@@ -141,7 +141,7 @@ if [[ -f "$PREFIX/bin/7zz" ]]; then
     select strictreply in "Yes" "No"; do
         relaxedreply=${strictreply:-$REPLY}
         case $relaxedreply in
-            Yes | yes | y ) ln -s "$PREFIX/bin/7zz" "$PREFIX/bin/7z"; break;;
+            Yes | yes | y ) ln -sf "$PREFIX/bin/7zz" "$PREFIX/bin/7z"; break;;
             No  | no  | n ) break;;
         esac
     done
@@ -162,7 +162,7 @@ cecho y "► Put your package(s) into packages/pip dir\n"
 select strictreply in "Yes" "No"; do
     relaxedreply=${strictreply:-$REPLY}
     case $relaxedreply in
-        Yes | yes | y ) pip install -r $SCRIPT_DIR/requirements.txt; pip2 install $SCRIPT_DIR/packages/pip/unrpyc-1.3.2.tar.gz; break;;
+        Yes | yes | y ) pip install --no-build-isolation --no-cache-dir -r $SCRIPT_DIR/requirements.txt; pip2 install $SCRIPT_DIR/packages/pip/unrpyc-1.3.2.tar.gz; break;;
         No  | no  | n ) break;;
     esac
 done
