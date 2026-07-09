@@ -86,13 +86,13 @@ export npm_config_cache=$HOME/.cache/npm
 export npm_config_userconfig=$HOME/.config/npm/npmrc
 
 # cargo
-export CARGO_HOME=$HOME/.cache/cargo
+export CARGO_HOME=$HOME/.local/cargo
 
 # udocker
 export UDOCKER_DIR=$HOME/.local/udocker
 
-# mlocate storage db
-export LOCATE_PATH="$HOME/.local/mlocate/storage.db"
+# mlocate shared storage path
+export LOCATE_PATH="$HOME/.local/state/mlocate/sdcard.db"
 
 # Wget
 export WGETRC=$HOME/.config/wget/wgetrc
