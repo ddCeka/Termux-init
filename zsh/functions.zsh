@@ -26,7 +26,7 @@ function ads2() {
     diff -uNr ublock.txt filter.txt > diff.patch ;
     cp ublock.txt temp.txt ;
     patch < diff.patch temp.txt ;
-    sort temp -u >> update2 ;
+    sort temp.txt -u >> update2 ;
     rm filter1.txt filter2.txt filter3.txt \
        filter4.txt filter5.txt filter6.txt \
        filter.txt temp.txt
@@ -42,6 +42,13 @@ function checkurl() {
 function inject-mod() {
     local folder="$1"
     cp -r ~/joiplay/${folder} "game/"
+}
+
+# Find apk endpoint(s)
+function endpointapk() {
+    local app="$1"
+    apktool d ${app} -o target ;
+    grep -Phro "(https?://)[\w\.-/]+[\"'\`]" target/ | sed 's#"##g' | anew | grep -v "w3\|android\|github\|http://schemas.android\|google\|http://goo.gl"
 }
 
 # Update proxy source http, socks4 and socks5
