@@ -37,8 +37,10 @@ tmux
 
 # Media.
 aria2
+catimg
 ffmpeg
 imagemagick
+jp2a
 megatools
 monolith
 
