@@ -226,6 +226,31 @@ function browsepkg() {
     fi
 }
 
+# download package via aria2
+function dlpkg() {
+    echo "[i] Download starting..."
+    local package="$1"
+    local managers
+    command -v apt >/dev/null 2>&1 && managers=("apt")
+    command -v pacman >/dev/null 2>&1 && managers=("pacman")
+
+    for mgr in "${managers[@]}"; do
+        echo
+        echo "[i] Downloading with $mgr..."
+
+        case "$mgr" in
+            apt)
+                apt-get download --print-uris "$package" | aria2c -i - >/dev/null 2>&1
+                ;;
+            pacman)
+                pacman -Sp "$package" | aria2c -i - >/dev/null 2>&1
+                ;;
+        esac
+        echo "[i] Downloaded package(s) for $mgr:"
+        echo "[✔] $package"
+    done
+}
+
 # Find largest file
 function flf() {
     du -h -x -s -- * | sort -r -h | head -20

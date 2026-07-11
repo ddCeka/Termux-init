@@ -58,7 +58,6 @@ gh
 git
 git-delta
 git-extras
-git-lfs
 help2man
 iconv
 lazygit
@@ -83,6 +82,7 @@ xmlto
 
 # Misc.
 cloneit
+colordiff
 feedr
 fdupes
 mlocate
