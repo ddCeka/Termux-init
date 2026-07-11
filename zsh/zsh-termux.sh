@@ -58,8 +58,6 @@ msg "Installing plugins"
 
 git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ~/.config/zsh/plugins/fast-syntax-highlighting >/dev/null 2>&1
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.config/zsh/plugins/zsh-autosuggestions >/dev/null 2>&1
-# this package also exist on termux-packages, idk which is more updated
-#git clone https://github.com/zsh-users/zsh-completions.git ~/.config/zsh/plugins/zsh-completions >/dev/null 2>&1
 
 curl -fsSL -o ~/.config/zsh/plugins/completion.zsh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/completion.zsh
 curl -fsSL -o ~/.config/zsh/plugins/history.zsh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/history.zsh
@@ -87,7 +85,6 @@ source $HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.
 source $HOME/.config/zsh/plugins/history.zsh
 source $HOME/.config/zsh/plugins/key-bindings.zsh
 source $HOME/.config/zsh/plugins/you-should-use.zsh
-source $HOME/.config/zsh/plugins/zsh-assistant.zsh
 
 # Aliases
 source $HOME/.config/zsh/aliases.zsh

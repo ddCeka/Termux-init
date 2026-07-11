@@ -71,7 +71,6 @@ mono
 ninja
 nodejs-lts
 openssh
-openssl-1.1
 patchelf
 patchutils
 pcre
