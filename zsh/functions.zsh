@@ -15,21 +15,26 @@ function ads1() {
     sort ads1.txt ads2.txt ads3.txt \
          ads4.txt ads5.txt ads6.txt \
          -u >> ads.txt ;
+    diff -uNr blacklist.txt ads.txt > ads.patch ;
+    cp blacklist.txt temp-ads.txt ;
+    patch < ads.patch temp-ads.txt ;
+    sort temp-ads.txt -u >> update.txt ;
     rm ads1.txt ads2.txt ads3.txt \
-       ads4.txt ads5.txt ads6.txt
+       ads4.txt ads5.txt ads6.txt \
+       ads.txt temp-ads.txt
 }
 function ads2() {
     "ads2.php" ;
     sort filter1.txt filter2.txt filter3.txt \
          filter4.txt filter5.txt filter6.txt \
          -u >> filter.txt ;
-    diff -uNr ublock.txt filter.txt > diff.patch ;
-    cp ublock.txt temp.txt ;
-    patch < diff.patch temp.txt ;
-    sort temp.txt -u >> update2 ;
+    diff -uNr ublock.txt filter.txt > ads2.patch ;
+    cp ublock.txt temp-ads2.txt ;
+    patch < ads2.patch temp-ads2.txt ;
+    sort temp-ads2.txt -u >> update2.txt ;
     rm filter1.txt filter2.txt filter3.txt \
        filter4.txt filter5.txt filter6.txt \
-       filter.txt temp.txt
+       filter.txt temp-ads2.txt
 }
 
 # Dead domain checker
@@ -595,7 +600,9 @@ function termux-build() {
 # iTerm2 colorschemes
 function termux-schemes() {
     if [ -n "$(command -v cloneit)" ]; then
-        gtcl https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/termux
+        echo "[i] Downloading..."
+        gtcl https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/termux upstream ;
+        cd upstream || return
     else
         echo "[✘] Command not found. Install cloneit first"
         return 1
@@ -788,7 +795,7 @@ function lwrcase() {
 function remspace() {
     if [ -n "$(command -v perl-rename)" ]; then
         find . -depth -name "* *" -exec perl-rename -n 's/ //g' {} +
-        echo -e "\n [i] Continue?"
+        echo "\n[i] Continue?"
         select strictreply in "Yes" "No"; do
             relaxedreply=${strictreply:-$REPLY}
             case $relaxedreply in

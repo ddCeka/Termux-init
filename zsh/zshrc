@@ -43,7 +43,6 @@ export VISUAL=$editor
 # set PATH so it includes custom directory if it exists
 if [[ "$(uname)" == "Linux" ]]; then
     path+=("$HOME/bin")
-    path+=("$HOME/lib")
     path+=("$HOME/.local/bin")
     path+=("$HOME/.local/lib")
     export MANPATH=":$MANPATH:$HOME/.local/share/man"
