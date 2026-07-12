@@ -232,7 +232,7 @@ function browsepkg() {
 }
 
 # download package via aria2
-function dlpkg() {
+function pkgdl() {
     echo "[i] Download starting..."
     local package="$1"
     local managers
@@ -245,7 +245,7 @@ function dlpkg() {
 
         case "$mgr" in
             apt)
-                apt-get download --print-uris "$package" | aria2c -i - >/dev/null 2>&1
+                apt-get download "$package" | aria2c -i - >/dev/null 2>&1
                 ;;
             pacman)
                 pacman -Sp "$package" | aria2c -i - >/dev/null 2>&1

@@ -85,7 +85,7 @@ export npm_config_cache=$HOME/.cache/npm
 export npm_config_userconfig=$HOME/.config/npm/npmrc
 
 # cargo
-export CARGO_HOME=$HOME/.local/cargo
+export CARGO_HOME=$HOME/.cache/cargo
 
 # udocker
 export UDOCKER_DIR=$HOME/.local/udocker
