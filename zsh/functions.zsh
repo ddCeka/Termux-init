@@ -2,9 +2,21 @@
 #### Functions ####
 ####           ####
 
+function check_directory_for_new_repository() {
+    local last_repository=""
+    current_repository=$(git rev-parse --show-toplevel 2> /dev/null)
+ 
+    if [ "$current_repository" ] && \
+        [ "$current_repository" != "$last_repository" ]; then
+        onefetch
+    fi
+    last_repository=$current_repository
+}
+
 # Enter and list directory
 function cd() {
-    builtin cd "$@" && {
+    builtin cd "$@" ;
+    check_directory_for_new_repository && {
         [ "$PS1" = "" ] || ls -ah --group-directories-first --color=auto ;
     };
 }
@@ -14,27 +26,27 @@ function ads1() {
     "ads1.php" ;
     sort ads1.txt ads2.txt ads3.txt \
          ads4.txt ads5.txt ads6.txt \
-         -u >> ads.txt ;
+         ads7.txt -u >> ads.txt ;
     diff -uNr blacklist.txt ads.txt > ads.patch ;
     cp blacklist.txt temp-ads.txt ;
     patch < ads.patch temp-ads.txt ;
     sort temp-ads.txt -u >> update.txt ;
     rm ads1.txt ads2.txt ads3.txt \
        ads4.txt ads5.txt ads6.txt \
-       ads.txt temp-ads.txt
+       ads7.txt ads.txt temp-ads.txt
 }
 function ads2() {
     "ads2.php" ;
     sort filter1.txt filter2.txt filter3.txt \
          filter4.txt filter5.txt filter6.txt \
-         -u >> filter.txt ;
+         filter7.txt -u >> filter.txt ;
     diff -uNr ublock.txt filter.txt > ads2.patch ;
     cp ublock.txt temp-ads2.txt ;
     patch < ads2.patch temp-ads2.txt ;
     sort temp-ads2.txt -u >> update2.txt ;
     rm filter1.txt filter2.txt filter3.txt \
        filter4.txt filter5.txt filter6.txt \
-       filter.txt temp-ads2.txt
+       filter7.txt filter.txt temp-ads2.txt
 }
 
 # Dead domain checker
@@ -1337,9 +1349,15 @@ function note() {
 }
 
 # Converts jpg files and resize by 20%
-function convimg() {
-    for img in *.jpg ; do
-        magick convert -regard-warnings -resize 20% "$img" "output-$img" ; done
+function convert-jpg-resize() {
+    for image in *.jpg ; do
+        magick convert -regard-warnings -resize 20% "$image" "output-$image" ; done
+}
+
+# Converts avif files to png
+function convert-avif-to-png() {
+    for image in *.avif ; do 
+        avifdec -j 8 "$image" "${image%.*}.png" ; done
 }
 
 # Transcode any image to compressed-but-lossless PNG

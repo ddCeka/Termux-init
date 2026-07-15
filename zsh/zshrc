@@ -69,7 +69,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 export GRADLE_USER_HOME=$HOME/.local/gradle
 
 # Android SDK & NDK
-export ANDROID_API_LEVEL=29
+export ANDROID_API_LEVEL=24
 export ANDROID_HOME=$HOME/.local/lib/android-sdk
 export ANDROID_NDK_HOME=$HOME/.local/lib/android-ndk
 export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH

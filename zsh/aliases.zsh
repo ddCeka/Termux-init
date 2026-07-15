@@ -195,6 +195,7 @@ alias py2='python2'
 alias py='python3'
 alias olser='ollama serve &'
 alias olst='pkill ollama'
+alias onefetch="onefetch --no-color-palette --no-art --nerd-fonts"
 alias apksigner='apksigner sign --ks $HOME/.keystore/sign.keystore'
 alias zipalcv='zipalign -c -v 4'
 alias qalc='qalc -color'
