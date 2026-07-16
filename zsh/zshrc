@@ -35,7 +35,7 @@ export TZ=$(getprop persist.sys.timezone)
 export GREP_COLORS='mt=1;32'
 
 # Editor
-editor="micro"
+editor="nvim"
 export EDITOR=$editor
 export SUDO_EDITOR=$editor
 export VISUAL=$editor
@@ -53,7 +53,11 @@ fi
 export SSH_AUTH_SOCK=$PREFIX/var/run/ssh-agent.socket
 
 # GPG
-export GPG_TTY=$TTY
+if [[ "$XDG_SESSION_TYPE" == "tty" ]]; then
+    # Fix GPG password prompt
+    # https://superuser.com/questions/520980/how-to-force-gpg-to-use-console-mode-pinentry-to-prompt-for-passwords
+    export GPG_TTY=$(tty)
+fi
 
 # Git
 export GIT_CONFIG_GLOBAL=$HOME/.config/git/gitconfig
@@ -70,8 +74,8 @@ export GRADLE_USER_HOME=$HOME/.local/gradle
 
 # Android SDK & NDK
 export ANDROID_API_LEVEL=24
-export ANDROID_HOME=$HOME/.local/lib/android-sdk
-export ANDROID_NDK_HOME=$HOME/.local/lib/android-ndk
+export ANDROID_HOME=$PREFIX/opt/android-sdk
+export ANDROID_NDK_HOME=$PREFIX/opt/android-ndk-r29
 export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
 export PATH=$ANDROID_HOME/build-tools:$PATH
 export PATH=$ANDROID_HOME/platform-tools:$PATH
@@ -150,7 +154,7 @@ export HISTFILE=$HOME/.config/zsh/zsh_history
 export HISTORY_IGNORE="(ls|ll|la|l|bg|fg|history|hh|quit|q|clear|c|help|h|logout|exit)"
 
 # Appearances
-export TERM="tmux-256color"
+export TERM="xterm-256color"
 export LANGUAGE="C.UTF-8"
 export LANG="C.UTF-8"
 export LC_ALL="C.UTF-8"
@@ -160,7 +164,12 @@ export LC_MESSAGES="C.UTF-8"
 # custom completions
 fpath=("$HOME/.local/share/scripts/site-functions" "${fpath[@]}")
 
-# Plugins
+#	 ____  _             _
+#	|  _ \| |_   _  __ _(_)_ __  ___
+#	| |_) | | | | |/ _` | | '_ \/ __|
+#	|  __/| | |_| | (_| | | | | \__ \
+#	|_|   |_|\__,_|\__, |_|_| |_|___/
+#	               |___/
 source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
 source $HOME/.config/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $HOME/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
@@ -186,3 +195,5 @@ else
     compinit -C -i -d $HOME/.config/zsh/zcompdump
 fi
 zmodload -i zsh/complist
+PROMPT_EOL_MARK=""
+last_repository=

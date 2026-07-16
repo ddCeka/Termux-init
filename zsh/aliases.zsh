@@ -196,6 +196,7 @@ alias py='python3'
 alias olser='ollama serve &'
 alias olst='pkill ollama'
 alias onefetch="onefetch --no-color-palette --no-art --nerd-fonts"
+alias patch-aapt="find ~/.local/gradle -name 'aapt2-*-linux.jar' -type f | xargs -I{} jar -uvf {} -C $PREFIX/bin aapt2"
 alias apksigner='apksigner sign --ks $HOME/.keystore/sign.keystore'
 alias zipalcv='zipalign -c -v 4'
 alias qalc='qalc -color'

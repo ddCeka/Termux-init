@@ -2,8 +2,8 @@
 #### Functions ####
 ####           ####
 
+# Onefetch needed, pkg install onefetch
 function check_directory_for_new_repository() {
-    local last_repository=""
     current_repository=$(git rev-parse --show-toplevel 2> /dev/null)
  
     if [ "$current_repository" ] && \
@@ -13,12 +13,12 @@ function check_directory_for_new_repository() {
     last_repository=$current_repository
 }
 
-# Enter and list directory
+# Enter and show directory summary
 function cd() {
-    builtin cd "$@" ;
+    builtin cd "$@" || true ;
     check_directory_for_new_repository && {
         [ "$PS1" = "" ] || ls -ah --group-directories-first --color=auto ;
-    };
+    }
 }
 
 # dead domains linter
