@@ -54,7 +54,7 @@ export SSH_AUTH_SOCK=$PREFIX/var/run/ssh-agent.socket
 
 # GPG
 if [[ "$XDG_SESSION_TYPE" == "tty" ]]; then
-    # Fix GPG password prompt
+    # Fix GPG password promt
     # https://superuser.com/questions/520980/how-to-force-gpg-to-use-console-mode-pinentry-to-prompt-for-passwords
     export GPG_TTY=$(tty)
 fi
@@ -141,6 +141,9 @@ export FZF_DEFAULT_OPTS="
 export FZF_CTRL_T_COMMAND='fd -t f -HF -E=.git -E=node_modules'
 export FZF_TMUX_OPTS='-p 90%'
 
+# Colored bat
+export BAT_THEME="Visual Studio Dark+"
+
 # Colored man
 export MANPAGER="less -R --use-color -Dd+g -Du+b"
 
@@ -185,6 +188,9 @@ source $HOME/.config/zsh/aliases.zsh
 
 # Functions
 source $HOME/.config/zsh/functions.zsh
+
+# Shell integration
+source $HOME/.local/share/scripts/shell-integration/integration.sh
 
 # Compinit
 autoload -Uz compinit

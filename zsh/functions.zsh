@@ -2,7 +2,7 @@
 #### Functions ####
 ####           ####
 
-# Onefetch needed, pkg install onefetch
+# require onefetch, pkg install onefetch
 function check_directory_for_new_repository() {
     current_repository=$(git rev-parse --show-toplevel 2> /dev/null)
  
@@ -19,79 +19,6 @@ function cd() {
     check_directory_for_new_repository && {
         [ "$PS1" = "" ] || ls -ah --group-directories-first --color=auto ;
     }
-}
-
-# dead domains linter
-function ads1() {
-    "ads1.php" ;
-    sort ads1.txt ads2.txt ads3.txt \
-         ads4.txt ads5.txt ads6.txt \
-         ads7.txt -u >> ads.txt ;
-    diff -uNr blacklist.txt ads.txt > ads.patch ;
-    cp blacklist.txt temp-ads.txt ;
-    patch < ads.patch temp-ads.txt ;
-    sort temp-ads.txt -u >> update.txt ;
-    rm ads1.txt ads2.txt ads3.txt \
-       ads4.txt ads5.txt ads6.txt \
-       ads7.txt ads.txt temp-ads.txt
-}
-function ads2() {
-    "ads2.php" ;
-    sort filter1.txt filter2.txt filter3.txt \
-         filter4.txt filter5.txt filter6.txt \
-         filter7.txt -u >> filter.txt ;
-    diff -uNr ublock.txt filter.txt > ads2.patch ;
-    cp ublock.txt temp-ads2.txt ;
-    patch < ads2.patch temp-ads2.txt ;
-    sort temp-ads2.txt -u >> update2.txt ;
-    rm filter1.txt filter2.txt filter3.txt \
-       filter4.txt filter5.txt filter6.txt \
-       filter7.txt filter.txt temp-ads2.txt
-}
-
-# Dead domain checker
-function checkurl() {
-    local url="check-url.sh"
-    cat "$1" | decolorize | xargs -n 1 -P 6 $url
-}
-
-# Inject mods into game folder
-function inject-mod() {
-    local folder="$1"
-    cp -r ~/joiplay/${folder} "game/"
-}
-
-# Find apk endpoint(s)
-function endpointapk() {
-    local app="$1"
-    apktool d ${app} -o target ;
-    grep -Phro "(https?://)[\w\.-/]+[\"'\`]" target/ | sed 's#"##g' | anew | grep -v "w3\|android\|github\|http://schemas.android\|google\|http://goo.gl"
-}
-
-# Update proxy source http, socks4 and socks5
-function proxdl() {
-    rm $HOME/.local/proxy/*.txt ;
-    aria2c -d $HOME/.local/proxy -i $HOME/.local/proxy/download-links --max-concurrent-downloads 3
-}
-
-# Update firefox user.js
-function betterfox() {
-    rm $HOME/.local/firefox/*.js ;
-    aria2c -d $HOME/.local/firefox -i $HOME/.local/firefox/betterfox.txt --max-concurrent-downloads 4
-}
-
-# Update git-filter-repo script
-function upd-gfr() {
-    rm $HOME/bin/git-filter-repo ;
-    curl -fsSL -o $HOME/bin/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo ;
-    chmod +x $HOME/bin/git-filter-repo
-}
-
-# Update fastget script
-function upd-fg() {
-    rm $HOME/bin/fastget ;
-    curl -fsSL -o $HOME/bin/fastget https://raw.githubusercontent.com/rhcp011235/fastget/refs/heads/main/fastget ;
-    chmod +x $HOME/bin/fastget
 }
 
 # Countfiles in directory
@@ -222,9 +149,9 @@ function cekdir() {
 # List file owned by a package with size
 function ownedpkg() {
     if [ -n "$(command -v apt)" ]; then
-        dpkg -S $1
+        dpkg -S "$1"
     elif [ -n "$(command -v pacman)" ]; then
-        pacman -Qlq $1 | grep -v '/$' | xargs -r du -h | sort -h
+        pacman -Qlq "$1" | grep -v '/$' | xargs -r du -h | sort -h
     fi
 }
 
@@ -609,18 +536,6 @@ function termux-build() {
     git checkout
 }
 
-# iTerm2 colorschemes
-function termux-schemes() {
-    if [ -n "$(command -v cloneit)" ]; then
-        echo "[i] Downloading..."
-        gtcl https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/termux upstream ;
-        cd upstream || return
-    else
-        echo "[✘] Command not found. Install cloneit first"
-        return 1
-    fi
-}
-
 # Update last N commits date to now
 function git-now() {
     if [ $# -ne 1 ]; then
@@ -686,19 +601,6 @@ function pr-files() {
             --bind "enter:execute($EDITOR {})"
     else
         echo "[✘] Command not found. Install github-cli first"
-        return 1
-    fi
-}
-
-# Ollama update all models
-function olupd() {
-    if [ -n "$(command -v ollama)" ]; then
-        ollama list | awk "NR>1 {print $1}" | sort -r | xargs -I {} sh -c echo "Updating model: {}";
-        ollama pull {};
-        echo "---"
-        echo "All models updated."
-    else
-        echo "[✘] Command not found. Install ollama first"
         return 1
     fi
 }
@@ -1278,9 +1180,6 @@ function compact() {
 function c7z() {
     for i in * ; do
         7z a -t7z "${i%.*}.7z" -m0=lzma2 -mx=9 -aoa "$i" ; done
-}
-function sav7z() {
-    7z a -t7z "saves.7z" -m0=lzma2 -mx=9 -aoa "saves"
 }
 
 # updates all package managers installed, lists updated packages, counts, and disk usage

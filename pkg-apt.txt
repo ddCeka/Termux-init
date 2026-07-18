@@ -31,8 +31,8 @@ zopfli
 
 # Editors/Viewers.
 gdu
+kibi
 neovim
-micro
 tmux
 
 # Media.
