@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=2046, 2086, 2089, 2090
+# shellcheck disable=SC2046,SC2086,SC2089,SC2090
 set -e
 
 SCRIPT_DIR=$(dirname "$(realpath "$0")")

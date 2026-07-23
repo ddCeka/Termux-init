@@ -127,7 +127,7 @@ function listdirs() {
 }
 
 # Show files which contain a term
-function grep-open() {
+function grep_open() {
     local editor="$EDITOR"
     rg -l "$1" | fzf --bind "enter:execute($editor + {})"
 }
@@ -352,7 +352,10 @@ function gg() {
             git config --global alias.reset 'reset --soft HEAD^'
             git config --global alias.graph 'log --graph --oneline --decorate'
             git config --global alias.compare 'difftool --dir-diff HEAD^ HEAD'
-            if which meld &>/dev/null; then
+            if which vimdiff &>/dev/null; then
+                git config --global diff.guitool vimdiff
+                git config --global merge.tool vimdiff
+            elif which meld &>/dev/null; then
                 git config --global diff.guitool meld
                 git config --global merge.tool meld
             elif which kdiff3 &>/dev/null; then
@@ -422,7 +425,7 @@ function gg() {
             fi
             ;;
         l | log )
-            git log --oneline --decorate --pretty=custom -n 16
+            git log --oneline --decorate --pretty=custom -n 15
             ;;
         m | merge )
             check_branch=$(git branch | grep "$2")
@@ -510,34 +513,8 @@ function ciaclean() {
         | xargs -n 1 git branch -d
 }
 
-# Cloning termux repository
-function termux-build() {
-    local repo="$1"
-    if [[ -z "$repo" ]]; then
-        echo "[✘] Usage: pick repo e.g termux or termux-pacman"
-        return 1
-    fi
-
-    echo "[i] Start cloning $repo"
-    git clone --branch master \
-        --single-branch \
-        --no-checkout \
-        --depth=1 \
-        --filter=tree:0 \
-        https://github.com/${repo}/termux-packages.git \
-        build
-    cd build || return
-    git sparse-checkout set --no-cone \
-        /disabled-packages /ndk-patches \
-        /packages /root-packages \
-        /scripts /x11-packages \
-        /build-all.sh /build-package.sh \
-        /clean.sh /repo.json
-    git checkout
-}
-
 # Update last N commits date to now
-function git-now() {
+function git_now() {
     if [ $# -ne 1 ]; then
         echo "[✘] Usage: git-now <number_of_commits>"
         echo "[i] Example: git-now 4"
@@ -563,7 +540,7 @@ function gcs() {
 }
 
 # review changed files on this branch
-function review-changes() {
+function review_changes() {
     local base_branch="${1:-}"
 
     if [ -z "$base_branch" ]; then
@@ -577,7 +554,7 @@ function review-changes() {
 }
 
 # show staged and unstaged file changes
-function changed-files() {
+function changed_files() {
     git status --short | awk '{print $2}' | fzf \
         --preview "git diff --cached -- {} | delta --width \$FZF_PREVIEW_COLUMNS && git diff -- {} | \
         delta --width \$FZF_PREVIEW_COLUMNS && git diff --no-index -- /dev/null {} | delta --width \$FZF_PREVIEW_COLUMNS" \
@@ -585,7 +562,7 @@ function changed-files() {
 }
 
 # Show diff for argument PR number for current repo
-function pr-diff() {
+function pr_diff() {
     if [ -n "$(command -v gh)" ]; then
         gh pr diff "$1" | delta
     else
@@ -595,7 +572,7 @@ function pr-diff() {
 }
 
 # Show PR files for argument PR number for current repo
-function pr-files() {
+function pr_files() {
     if [ -n "$(command -v gh)" ]; then
         gh pr diff "$1" --name-only | fzf \
             --bind "enter:execute($EDITOR {})"
@@ -705,26 +682,6 @@ function lwrcase() {
     done
 }
 
-# Remove spaces in files within directory
-function remspace() {
-    if [ -n "$(command -v perl-rename)" ]; then
-        find . -depth -name "* *" -exec perl-rename -n 's/ //g' {} +
-        echo "\n[i] Continue?"
-        select strictreply in "Yes" "No"; do
-            relaxedreply=${strictreply:-$REPLY}
-            case $relaxedreply in
-                Yes | yes | y ) find . -depth -name "* *" -exec perl-rename -v 's/ //g' {} +; echo "[i] Done"; break;;
-                No  | no  | n ) return 1;;
-            esac
-        done
-    else
-        for i in *' '*; do
-            mv "$i" "echo $i | sed -e 's/ //g'"
-            ls -a --group-directories-first
-        done
-    fi
-}
-
 # Quick HTTP server in current directory
 function phttp() {
     local port="${1:-8000}"
@@ -772,20 +729,6 @@ function genpass() {
     echo
 }
 
-# Lists all files matching a name
-function locatef() {
-    if [ -n "$(command -v locate)" ]; then
-        if [ -z "$1" ]; then
-            echo "[✘] Usage: locatef <file-name>"
-            return 1
-        fi
-        locate -e "$1" | grep -o -E -e '(/[^/]+){4}$';
-    else
-        echo "[✘] Command not found. Install mlocate first."
-        return 1
-    fi
-}
-
 # Quick backup of a file or directory
 function qbackup() {
 	local item="$1"
@@ -813,7 +756,7 @@ function execin() {
 }
 
 # kill all tmux sessions
-function tmux-clean() {
+function tmux_clean() {
     tmux list-sessions | grep -E -v '\(attached\)$' | while IFS='\n' read line; do
         tmux kill-session -t "${line%%:*}"
     done
@@ -831,7 +774,7 @@ function bined() {
 }
 
 # Runs when tab is pressed after ,
-function fzf-comprun() {
+function fzf_comprun() {
     local command=$1
     shift
 
@@ -1176,12 +1119,6 @@ function compact() {
     fi
 }
 
-# Quick compress into 7z
-function c7z() {
-    for i in * ; do
-        7z a -t7z "${i%.*}.7z" -m0=lzma2 -mx=9 -aoa "$i" ; done
-}
-
 # updates all package managers installed, lists updated packages, counts, and disk usage
 function uall() {
     echo "[i] Starting update-all..."
@@ -1245,72 +1182,4 @@ function note() {
         echo "$(date '+%d-%m-%Y %H:%M:%S'): $*" >>"$note_file"
         echo "[✔] Note added"
     fi
-}
-
-# Converts jpg files and resize by 20%
-function convert-jpg-resize() {
-    for image in *.jpg ; do
-        magick convert -regard-warnings -resize 20% "$image" "output-$image" ; done
-}
-
-# Converts avif files to png
-function convert-avif-to-png() {
-    for image in *.avif ; do 
-        avifdec -j 8 "$image" "${image%.*}.png" ; done
-}
-
-# Transcode any image to compressed-but-lossless PNG
-function convert-to-png() {
-    magick "$1" -strip -define png:compression-filter=5 \
-        -define png:compression-level=9 \
-        -define png:compression-strategy=1 \
-        -define png:exclude-chunk=all \
-        "${1%.*}.png"
-}
-
-# Converts the input folder to webp, moves over the prompt and then removes the original
-function convert-png-to-webp() {
-    local DIR=$1
-    find "$DIR" -type f -name "*.png" | parallel '
-        img={}
-        outputWebp="${img%.png}.webp"
-        cwebp -q 80 "$img" -o "$outputWebp"
-        exiftool -TagsFromFile "$img" "-UserComment<Parameters" -comment= -overwrite_original "$outputWebp"
-        rm "$img" 
-    '
-}
-
-# Converts all audio files in the target dir (first arg) to opus with metadata at a rate of 64kbps.
-function convert-audio() {
-    local DIR=$1
-    if [ -z "$1" ]; then
-        echo "[✘] Please provide a folder as an argument"
-        return 1
-    fi
-
-    echo "[i] Converting $DIR"
-    find "$DIR" -type f -name \
-        "*.mp3" -o -name "*.m4a" -o -name \
-        "*.wav" -o -name "*.flac" -o -name \
-        "*.aac" -o -name "*.mp4" -o -name "*.wma" \
-        | parallel ffmpeg -i {} -c:a libopus -b:a 64k -map_metadata 0 -id3v2_version 3 {.}.opus &&
-        echo "[✔] ${DIR} Converted" ;
-    find "$DIR" -type f -name \
-        "*.mp3" -o -name "*.m4a" -o -name \
-        "*.wav" -o -name "*.flac" -o -name \
-        "*.aac" -o -name "*.mp4" -o -name "*.wma" \
-        | parallel rm {}
-}
-
-# Remuxes all video files in the target folder to MKV
-function convert-mkv() {
-    local folder="$1"
-    if [ -z "$1" ]; then
-        echo "[✘] Please provide a folder as an argument"
-        return 1
-    fi
-
-    echo "[i] Converting $folder"
-    find "$folder" -type f -iname "*.mp4" -o -iname "*.mov" -o -iname "*.avi" -o -iname "*.mkv" | parallel ffmpeg -i {} -c:v copy -c:a copy -map_metadata -1 {.}.mkv &&
-    echo "[✔] $folder converted"
 }
