@@ -4,5 +4,4 @@ pefile @ file:///data/data/com.termux/files/home/termux-init/packages/pip/pefile
 pygments @ file:///data/data/com.termux/files/home/termux-init/packages/pip/pygments-2.20.0.tar.gz#sha256=6757cd03768053ff99f3039c1a36d6c0aa0b263438fcab17520b30a303a82b5f
 requests @ file:///data/data/com.termux/files/home/termux-init/packages/pip/requests-2.34.2.tar.gz#sha256=f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed
 rich @ file:///data/data/com.termux/files/home/termux-init/packages/pip/rich-15.0.0.tar.gz#sha256=edd07a4824c6b40189fb7ac9bc4c52536e9780fbbfbddf6f1e2502c31b068c36
-standard-imghdr @ file:///data/data/com.termux/files/home/termux-init/packages/pip/standard_imghdr-3.13.0.tar.gz#sha256=8d9c68058d882f6fc3542a8d39ef9ff94d2187dc90bd0c851e0902776b7b7a42
 unrpyc @ file:///data/data/com.termux/files/home/termux-init/packages/pip/unrpyc-2.0.4.tar.gz#sha256=2fe85cb9395f1d6db385f19dfd7cd6f70cb54e520f8dd8e4c1393c6ba9027139

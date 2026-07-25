@@ -31,7 +31,6 @@ zopfli
 
 # Editors/Viewers.
 gdu
-kibi
 neovim
 tmux
 
@@ -60,8 +59,11 @@ git-delta
 git-extras
 help2man
 iconv
+jq-lsp
 lazygit
+lua-language-server
 llvm
+marksman
 mono
 ninja
 nodejs-lts
@@ -72,6 +74,7 @@ php
 python
 python2
 python-lxml
+python-pynvim
 python-yt-dlp
 termux-api
 termux-elf-cleaner
@@ -88,6 +91,7 @@ mlocate
 qalc
 rlwrap
 shellcheck
+shfmt
 tealdeer
 wego
 

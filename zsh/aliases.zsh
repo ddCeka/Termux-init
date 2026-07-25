@@ -40,12 +40,11 @@ if [[ -x $PREFIX/bin/eza ]]; then
     alias l='eza --color=auto --icons=auto'
     alias ls='eza --color=always --group-directories-first --icons=auto'
     alias l.='eza -d --color=auto --icons=auto .*'
-    alias la='eza -a --group-directories-first --color=auto --icons=auto'
-    alias ll='eza -hl --group-directories-first --classify=always --color=auto --icons=auto'
+    alias la='eza -a --no-user --group-directories-first --color=auto --icons=auto'
+    alias ll='eza -ahl --no-user --group-directories-first --classify=always --color=auto --icons=auto'
     alias ll.='eza -hl -d --group-directories-first --classify=always --color=auto --icons=auto .*'
     alias lm='eza --color=auto --icons=auto | less'
     alias l1='eza -1 --group-directories-first --classify=auto --color=auto --icons=auto'
-    alias l1m='eza -1 --group-directories-first --classify=auto --color=auto --icons=auto | less'
     alias lh='eza -ld --color=auto --icons=auto .??*'
     alias lsn='eza --color=auto --icons=auto | cat -n'
 else
@@ -57,7 +56,6 @@ else
     alias ll.='ls --color=auto -Fhl -d .*'
     alias lm='ls --color=auto | less'
     alias l1='ls -1F --color=auto --group-directories-first'
-    alias l1m='ls -1F --color=auto --group-directories-first | less'
     alias lh='ls -ld --color=auto .??*'
     alias lsn='ls --color=auto | cat -n'
 fi

@@ -1,7 +1,7 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.config}/zsh/powerlevel10k/p10k/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then  
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.config}/zsh/powerlevel10k/p10k/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.config}/zsh/powerlevel10k/p10k/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
@@ -74,11 +74,11 @@ export GRADLE_USER_HOME=$HOME/.local/gradle
 
 # Android SDK & NDK
 export ANDROID_API_LEVEL=24
-export ANDROID_HOME=$PREFIX/opt/android-sdk
-export ANDROID_NDK_HOME=$PREFIX/opt/android-ndk-r29
-export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-export PATH=$ANDROID_HOME/build-tools:$PATH
-export PATH=$ANDROID_HOME/platform-tools:$PATH
+export ANDROID_HOME=$HOME/.local/lib/android-sdk
+export ANDROID_NDK_HOME=$HOME/.local/lib/android-ndk-r29
+# export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+# export PATH=$ANDROID_HOME/build-tools:$PATH
+# export PATH=$ANDROID_HOME/platform-tools:$PATH
 
 # Python3
 export PYTHONPYCACHEPREFIX=$HOME/.cache/Python
@@ -89,7 +89,7 @@ export npm_config_cache=$HOME/.cache/npm
 export npm_config_userconfig=$HOME/.config/npm/npmrc
 
 # cargo
-export CARGO_HOME=$HOME/.cache/cargo
+export CARGO_HOME=$HOME/.local/cargo
 
 # udocker
 export UDOCKER_DIR=$HOME/.local/udocker
@@ -119,10 +119,13 @@ export AICHAT_FUNCTIONS_DIR=$HOME/data/llm-functions
 # parallel
 export PARALLEL_HOME=$HOME/.config/parallel
 
+# hstr
+export HSTR_CONFIG=hicolor,prompt-bottom,raw-history-view
+
 # hydra
-export HYDRA_PROXY=$HOME/.local/proxy/http.txt
-#export HYDRA_PROXY=$HOME/.local/proxy/socks4.txt
-#export HYDRA_PROXY=$HOME/.local/proxy/socks5.txt
+export HYDRA_PROXY=$HOME/.local/share/proxy/http.txt
+#export HYDRA_PROXY=$HOME/.local/share/proxy/socks4.txt
+#export HYDRA_PROXY=$HOME/.local/share/proxy/socks5.txt
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude=.git --exclude=node_modules'
@@ -146,9 +149,6 @@ export BAT_THEME="Visual Studio Dark+"
 
 # Colored man
 export MANPAGER="less -R --use-color -Dd+g -Du+b"
-
-# hstr get more colours
-export HSTR_CONFIG=hicolor
 
 # History file
 export HISTFILE=$HOME/.config/zsh/zsh_history
