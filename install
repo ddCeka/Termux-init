@@ -129,17 +129,6 @@ if [[ -f "$SCRIPT_DIR/pkg-${package}.txt" ]]; then
     fi
 fi
 
-if [[ -f "$PREFIX/bin/7zz" ]]; then
-    cecho r "\n► Create 7z symlink?\n"
-    select strictreply in "Yes" "No"; do
-        relaxedreply=${strictreply:-$REPLY}
-        case $relaxedreply in
-            Yes | yes | y ) ln -sf "$PREFIX/bin/7zz" "$PREFIX/bin/7z"; break;;
-            No  | no  | n ) break;;
-        esac
-    done
-fi
-
 cecho g "\n► Install local python packages?\n"
 cecho y "► Put your package(s) into packages/pip dir\n"
 select strictreply in "Yes" "No"; do
