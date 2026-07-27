@@ -930,7 +930,7 @@ function ex() {
         ;;
     *.7z)
         echo "[✔] Extracting 7z archive: $archive"
-        (cd "$archive_dir" && 7z x "$archive_name") || {
+        (cd "$archive_dir" && 7zz x "$archive_name") || {
             echo "[✘] Failed to extract $archive"
             return 1
         }
@@ -995,8 +995,8 @@ function ex() {
         echo "[✔] Mounting/extracting iso image: $archive"
         local extract_dir="${archive_dir}/${archive_name%.iso}_extracted"
         mkdir -p "$extract_dir"
-        if command -v 7z &>/dev/null; then
-            7z x "$archive" -o"$extract_dir" || {
+        if command -v 7zz &>/dev/null; then
+            7zz x "$archive" -o "$extract_dir" || {
                 echo "[✘] Failed to extract $archive"
                 return 1
             }
@@ -1038,7 +1038,7 @@ function ex() {
         }
         ;;
     *)
-        (cd "$archive_dir" && 7z x "$archive_name") || {
+        (cd "$archive_dir" && 7zz x "$archive_name") || {
             echo "[✘] Failed to extract $archive"
             echo "[i] Supported formats:"
             echo "    Tar: .tar, .tar.gz/.tgz, .tar.xz/.txz, .tar.bz2/.tbz2/.tbz"
@@ -1109,7 +1109,7 @@ function compact() {
             *.[zZ][iI][pP])
                 local file="$1"; shift; zip -r "$file" "$@" ;;
             *.7[zZ])
-                local file="$1"; shift; 7z a -r "$file" "$@" ;;
+                local file="$1"; shift; 7zz a -r "$file" "$@" ;;
             *.[xX][zZ])
                 local file="$1"; shift; tar czvf "$file" "$@" ;;
             *)    echo "[✘] don't know how to compress '$i' ..." ;;

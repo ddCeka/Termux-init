@@ -80,7 +80,6 @@ alias rmd='rm -rfv'
 alias cpv='cp --preserve=all -v'
 alias cpr='cp --preserve=all -R'
 alias rsync='rsync -ahW --info=progress2'
-alias cs='printf "\033c"'
 alias lincol='echo -e "lines\ncols" | tput -S'
 alias preview="fzf --preview='bat --squeeze-blank --color=always --style=full {}' --preview-window=down"
 alias q='clear && exit'
@@ -141,7 +140,7 @@ elif [ -n "$(command -v pacman)" ]; then
     alias pacis='pacman -Fy' # Sync the files database to local.
     alias pacinu='pacman -U' # Install specific local package(s).
     alias pacre='pacman -R' # Remove the specified package(s), retaining its configuration(s) and required dependencies.
-    alias pacun='pacman -Rcsn' # Remove the specified package(s), its configuration(s) and unneeded dependencies.
+    alias pacun='pacman -Rcns' # Remove the specified package(s), its configuration(s) and unneeded dependencies.
     alias pacinfo='pacman -Qi' # Display information about a given package in the database.
     alias pacview='pacman -Si' # Display information about a given package in the repositories.
     alias pacse='pacman -Ss' # Search for package(s) in the repositories.
