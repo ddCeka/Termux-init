@@ -89,6 +89,7 @@ termux-elf-cleaner
 update-info-dir
 uuid-utils
 xmlto
+yt-dlp-ejs
 
 # Misc.
 cloneit
