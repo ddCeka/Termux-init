@@ -5,7 +5,7 @@
 # require onefetch, pkg install onefetch
 function check_directory_for_new_repository() {
     current_repository=$(git rev-parse --show-toplevel 2> /dev/null)
- 
+
     if [ "$current_repository" ] && \
         [ "$current_repository" != "$last_repository" ]; then
         onefetch
@@ -23,7 +23,7 @@ function cd() {
 
 # Countfiles in directory
 function countfiles() {
-    for t in files links directories ; do 
+    for t in files links directories ; do
         echo "$(find . -type ${t:0:1} | wc -l)" $t ; done 2> /dev/null
 }
 
@@ -159,12 +159,12 @@ function ownedpkg() {
 function browsepkg() {
     if [ -n "$(command -v apt)" ]; then
         apt-cache pkgnames | fzf --multi --cycle --layout=reverse \
-        --preview "apt-cache show {}" --preview-window=:60% \
+        --preview "apt-cache show {}" --preview-window=:70% \
         --bind=space:toggle-preview | xargs -ro apt install
     elif [ -n "$(command -v pacman)" ]; then
         pacman -Slq | fzf --multi --cycle --layout=reverse \
-        --preview 'pacman -Si {}' --preview-window=:60% \
-        --bind='enter:execute(pacman -Si {} | less)'
+        --preview 'pacman -Si {}' --preview-window=:70% \
+        --bind='enter:execute(pacman -S {})'
     else
         return 1
     fi
@@ -425,7 +425,7 @@ function gg() {
             fi
             ;;
         l | log )
-            git log --oneline --decorate --pretty=custom -n 15
+            git log --oneline --decorate --pretty=custom -n 10
             ;;
         m | merge )
             check_branch=$(git branch | grep "$2")
@@ -506,7 +506,7 @@ function ciaclean() {
         echo "[✘] Usage: input master or main branch"
         return 1
     fi
-    
+
     echo "[i] Cleaning merged git $branch"
     git branch --merged origin/${branch} \
         | grep -vE "^\s*(\*|${branch}|dev)" \

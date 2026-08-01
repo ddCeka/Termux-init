@@ -62,11 +62,10 @@ fi
 # Git
 export GIT_CONFIG_GLOBAL=$HOME/.config/git/gitconfig
 
-# git-cliff
-export GIT_CLIFF_CONFIG=$HOME/.config/git-cliff/cliff.toml
-
 # openjdk
+# export JAVA_HOME=$PREFIX/lib/jvm/java-17-openjdk
 export JAVA_HOME=$PREFIX/lib/jvm/java-21-openjdk
+# export JAVA_HOME=$PREFIX/lib/jvm/java-25-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
 # gradle
@@ -75,10 +74,7 @@ export GRADLE_USER_HOME=$HOME/.local/gradle
 # Android SDK & NDK
 export ANDROID_API_LEVEL=24
 export ANDROID_HOME=$HOME/.local/lib/android-sdk
-export ANDROID_NDK_HOME=$HOME/.local/lib/android-ndk-r29
-# export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-# export PATH=$ANDROID_HOME/build-tools:$PATH
-# export PATH=$ANDROID_HOME/platform-tools:$PATH
+export ANDROID_NDK_HOME=$ANDROID_HOME/android-ndk-r29
 
 # Python3
 export PYTHONPYCACHEPREFIX=$HOME/.cache/Python
@@ -122,27 +118,27 @@ export PARALLEL_HOME=$HOME/.config/parallel
 # hstr
 export HSTR_CONFIG=hicolor,prompt-bottom,raw-history-view
 
-# hydra
-export HYDRA_PROXY=$HOME/.local/share/proxy/http.txt
-#export HYDRA_PROXY=$HOME/.local/share/proxy/socks4.txt
-#export HYDRA_PROXY=$HOME/.local/share/proxy/socks5.txt
+# proxy
+# export PROXY=$HOME/.local/share/proxy/http.txt
+export PROXY=$HOME/.local/share/proxy/socks4.txt
+# export PROXY=$HOME/.local/share/proxy/socks5.txt
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude=.git --exclude=node_modules'
 export FZF_COMPLETION_TRIGGER=','
 export FZF_DEFAULT_OPTS="
---layout=reverse --info=inline --height=70% --multi --cycle --margin=1 --border=rounded
+--layout=reverse --info=inline --height=80% --multi --cycle --margin=1 --border=rounded
 --preview '([[ -f {} ]] && (bat --style=numbers --color=always --line-range=:500 {} || cat {})) || ([[ -d {} ]] \
 && (ls -ahlT -L=2 -s=extension --group-directories-first --icons --git --git-ignore --no-user {} | less)) || echo {} 2> /dev/null | head -200'
 --prompt=' ' --pointer='' --marker='✓'
 --color='hl:148,hl+:154,prompt:blue,pointer:032,marker:010,bg+:000,gutter:000'
---preview-window=right:60%
+--preview-window=right:70%
 --bind '?:toggle-preview'
 --bind 'ctrl-a:select-all'
 --bind 'ctrl-y:execute-silent(echo {+} | $CLIPCOPY)'
 --bind 'ctrl-e:execute($TERMINAL $EDITOR {+})+reload(fzf)'"
 export FZF_CTRL_T_COMMAND='fd -t f -HF -E=.git -E=node_modules'
-export FZF_TMUX_OPTS='-p 90%'
+export FZF_TMUX_OPTS='-p 99%'
 
 # Colored bat
 export BAT_THEME="Visual Studio Dark+"

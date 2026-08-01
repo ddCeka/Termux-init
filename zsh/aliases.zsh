@@ -21,13 +21,6 @@ if [[ -x $PREFIX/bin/nvim ]]; then
     alias vim='nvim'
 fi
 
-# Replace 'ncdu' with 'ncdu2' (if available)
-if [[ -x $PREFIX/bin/ncdu2 ]]; then
-    alias ncdu='ncdu2 -e --color=dark-bg --show-itemcount --show-mtime'
-else
-    alias ncdu='ncdu'
-fi
-
 # Replace 'cat' with 'bat' (if available)
 if [[ -x $PREFIX/bin/bat ]]; then
     alias cat='bat --color=always --decorations=never --paging=never'
@@ -167,7 +160,7 @@ alias open='termux-open-url'
 alias lock='termux-wake-lock'
 alias unlock='termux-wake-unlock'
 alias cleaner='termux-junk-cleaner'
-alias createc='create-conventional-changelog'
+alias ccc='create-conventional-changelog'
 alias ddl='dead-domains-linter'
 
 # Applications shortcuts
@@ -216,11 +209,8 @@ alias lg='lazygit'
 alias gfr='git-filter-repo'
 alias commit-date="git log -1 --format=%cs | sed 's/-/./g'"
 alias commit-sha="find . -type f ! -path '*/.git/*' -print0 | xargs -0 sha256sum | LC_ALL=C sort | sha256sum"
-alias ga="git add"
-alias gc="git commit -m"
 alias gca="git commit --all -m"
 alias gl="git pull --rebase --autostash"
-alias gp="git push"
 alias gpf="git push --force"
 alias gss="git status -s"
 alias gsd="git status -s && git diff HEAD"
