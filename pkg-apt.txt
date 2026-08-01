@@ -30,7 +30,7 @@ zip
 zopfli
 
 # Editors/Viewers.
-gdu
+ncdu
 neovim
 tmux
 
