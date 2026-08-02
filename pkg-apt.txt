@@ -57,6 +57,7 @@ gh
 git
 git-delta
 git-extras
+gradle
 help2man
 iconv
 jq-lsp
@@ -76,6 +77,7 @@ python2
 python-lxml
 python-pynvim
 python-yt-dlp
+rust
 termux-api
 termux-elf-cleaner
 update-info-dir
