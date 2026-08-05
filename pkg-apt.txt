@@ -57,6 +57,7 @@ gh
 git
 git-delta
 git-extras
+git-lfs
 gradle
 help2man
 iconv
@@ -90,6 +91,7 @@ colordiff
 feedr
 fdupes
 mlocate
+onefetch
 qalc
 rlwrap
 shellcheck
