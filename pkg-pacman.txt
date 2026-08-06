@@ -45,7 +45,6 @@ monolith
 # Development (tools).
 autoconf
 automake
-aapt2
 apkeditor
 apksigner
 apktool
@@ -74,6 +73,7 @@ marksman
 mono
 ninja
 nodejs
+npm
 openssh
 patchelf
 patchutils
