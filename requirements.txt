@@ -1,6 +1,7 @@
 aplib @ file:///data/data/com.termux/files/home/.local/packages/python/aplib-0.6.tar.gz#sha256=7ba491b8f9d0590947191d67a904aa66f7077eec87cdbc1c0f0f9474b44e675b
 corrupy @ file:///data/data/com.termux/files/home/.local/packages/python/corrupy-0.1.1.tar.gz#sha256=3b08a00f80a6f9bcd0c938769ef3352f1126627805d26fa1e4f42865a4035784
 pefile @ file:///data/data/com.termux/files/home/.local/packages/python/pefile-2024.8.26.tar.gz#sha256=49ed96d496e565b7e3a6a113af3f4c2672b8e173c32349efc63cefbcbcf89d62
+pyfunceble @ file:///data/data/com.termux/files/home/.local/packages/python/pyfunceble-4.3.1.tar.gz#sha256=086edcc808ef47fccb5ffe27fc522a3c32207602d70c34da8e273992b8a51f21
 pygments @ file:///data/data/com.termux/files/home/.local/packages/python/pygments-2.20.0.tar.gz#sha256=6757cd03768053ff99f3039c1a36d6c0aa0b263438fcab17520b30a303a82b5f
 requests @ file:///data/data/com.termux/files/home/.local/packages/python/requests-2.34.2.tar.gz#sha256=f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed
 rich @ file:///data/data/com.termux/files/home/.local/packages/python/rich-15.0.0.tar.gz#sha256=edd07a4824c6b40189fb7ac9bc4c52536e9780fbbfbddf6f1e2502c31b068c36
