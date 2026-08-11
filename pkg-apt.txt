@@ -61,6 +61,7 @@ gradle
 help2man
 iconv
 jq-lsp
+kotlin
 lazygit
 lua-language-server
 llvm
