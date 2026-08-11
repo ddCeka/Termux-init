@@ -33,11 +33,11 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     os_icon                 # os identifier
-    time                    # current time
     context                 # user@hostname
     dir                     # current directory
     # =========================[ Line #2 ]=========================
     newline                 # \n
+    time                    # current time
     vcs                     # git status
     command_execution_time  # duration of the last command
     status                  # exit code of the last command
@@ -196,9 +196,9 @@
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
-  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=255
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=123
   # Custom icon.
-  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='□'
+  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='󰯑 '
 
   ################################[ prompt_char: prompt symbol ]################################
   # Transparent background.
@@ -1664,7 +1664,7 @@
 
   ####################################[ time: current time ]####################################
   # Current time color.
-  typeset -g POWERLEVEL9K_TIME_FOREGROUND=66
+  typeset -g POWERLEVEL9K_TIME_FOREGROUND=123
   # Format for the current time: 09:51:02. See `man 3 strftime`.
   typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M}'
   # If set to true, time will update when you hit enter. This way prompts for the past
@@ -1672,7 +1672,7 @@
   # behavior where they contain the end times of their preceding commands.
   typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=false
   # Custom icon.
-  typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION=
+  typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION='󱇻 '
   # Custom prefix.
   # typeset -g POWERLEVEL9K_TIME_PREFIX='%244Fat '
 
@@ -1715,7 +1715,7 @@
   #   - always:   Trim down prompt when accepting a command line.
   #   - same-dir: Trim down prompt when accepting a command line unless this is the first command
   #               typed after changing current working directory.
-  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=off
+  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
 
   # Instant prompt mode.
   #

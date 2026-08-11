@@ -190,8 +190,9 @@ function pkgdl() {
                 pacman -Sp "$package" | aria2c -i - >/dev/null 2>&1
                 ;;
         esac
+        pkg_name=$(basename "$package")
         echo "[i] Downloaded package(s) for $mgr:"
-        echo "[✔] $package"
+        echo "[✔] $pkg_name"
     done
 }
 

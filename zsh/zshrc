@@ -99,19 +99,6 @@ export WGETRC=$HOME/.config/wget/wgetrc
 # Wego
 export WEGORC=$HOME/.config/wego/wegorc
 
-# ollama
-export OLLAMA_FLASH_ATTENTION=1
-export OLLAMA_KV_CACHE_TYPE="q8_0"
-export OLLAMA_MODELS="$HOME/models"
-export OLLAMA_NOHISTORY="true"
-export OLLAMA_NUM_PARALLEL=2
-
-# aichat
-export AICHAT_CONFIG_DIR=$HOME/.config/aichat
-export AICHAT_CONFIG_FILE=$HOME/.config/aichat/config.yaml
-export AICHAT_ENV_FILE=$HOME/.config/aichat/env
-export AICHAT_FUNCTIONS_DIR=$HOME/data/llm-functions
-
 # parallel
 export PARALLEL_HOME=$HOME/.config/parallel
 
@@ -177,7 +164,6 @@ source $HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.
 source $HOME/.config/zsh/plugins/history.zsh
 source $HOME/.config/zsh/plugins/key-bindings.zsh
 source $HOME/.config/zsh/plugins/you-should-use.zsh
-source $HOME/.config/zsh/plugins/zsh-assistant.zsh
 
 # Aliases
 source $HOME/.config/zsh/aliases.zsh
