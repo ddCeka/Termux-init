@@ -4,6 +4,7 @@ bat
 dust
 eza
 fd
+file
 fzf
 gnupg
 htop
@@ -43,6 +44,7 @@ megatools
 monolith
 
 # Development (tools).
+android-tools
 autoconf
 automake
 apkeditor
