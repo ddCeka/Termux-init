@@ -16,6 +16,7 @@ ripgrep
 sudo
 wget
 which
+yq
 zsh
 zsh-completions
 
@@ -61,14 +62,13 @@ file
 gettext
 gh
 git
+git-absorb
 git-delta
 git-extras
 git-lfs
-gradle
 help2man
 iconv
 jq-lsp
-kotlin
 lazygit
 libtool
 lua-language-server
