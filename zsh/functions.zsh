@@ -804,6 +804,13 @@ function ex() {
     local archive_dir=$(dirname "$(realpath "$archive")")
     local archive_name=$(basename "$archive")
 
+    # Change to the archive directory if not already there
+    local current_dir=$(pwd)
+    if [[ "$current_dir" != "$archive_dir" ]]; then
+        cd "$archive_dir"
+        echo "[i] Changed to directory: $archive_dir"
+    fi
+
     # Remember existing files before extraction
     local temp_before=$(mktemp)
     ls -1A "$archive_dir" 2>/dev/null | sort >"$temp_before"
@@ -1076,13 +1083,6 @@ function ex() {
 
     # Clean up temporary files
     rm -f "$temp_before" "$temp_after" 2>/dev/null
-
-    # Change to the archive directory if not already there
-    local current_dir=$(pwd)
-    if [[ "$current_dir" != "$archive_dir" ]]; then
-        cd "$archive_dir"
-        echo "[i] Changed to directory: $archive_dir"
-    fi
 }
 
 # file(s) compressor

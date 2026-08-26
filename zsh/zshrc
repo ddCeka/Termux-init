@@ -46,7 +46,7 @@ if [[ "$(uname)" == "Linux" ]]; then
     path+=("$HOME/.local/bin")
     path+=("$HOME/.local/lib")
     export MANPATH=":$MANPATH:$HOME/.local/share/man"
-    export LD_LIBRARY_PATH=/vendor/lib64:$PATH
+    # export LD_LIBRARY_PATH=/vendor/lib64:$PATH
 fi
 
 # SSH
@@ -66,7 +66,7 @@ export GIT_CONFIG_GLOBAL=$HOME/.config/git/gitconfig
 # export JAVA_HOME=$PREFIX/lib/jvm/java-17-openjdk
 export JAVA_HOME=$PREFIX/lib/jvm/java-21-openjdk
 # export JAVA_HOME=$PREFIX/lib/jvm/java-25-openjdk
-export PATH=$JAVA_HOME/bin:$PATH
+path+=("$JAVA_HOME/bin")
 
 # gradle
 export GRADLE_USER_HOME=$HOME/.local/gradle
@@ -75,6 +75,7 @@ export GRADLE_USER_HOME=$HOME/.local/gradle
 export ANDROID_API_LEVEL=24
 export ANDROID_HOME=$HOME/.local/lib/android-sdk
 export ANDROID_NDK_HOME=$ANDROID_HOME/android-ndk-r29
+# path+=("$ANDROID_HOME/cmdline-tools/latest/bin")
 
 # Python3
 export PYTHONPYCACHEPREFIX=$HOME/.cache/Python
@@ -86,9 +87,6 @@ export npm_config_userconfig=$HOME/.config/npm/npmrc
 
 # cargo
 export CARGO_HOME=$HOME/.local/cargo
-
-# udocker
-export UDOCKER_DIR=$HOME/.local/udocker
 
 # mlocate shared storage path
 export LOCATE_PATH="$HOME/.local/state/mlocate/sdcard.db"
@@ -183,5 +181,6 @@ else
     compinit -C -i -d $HOME/.config/zsh/zcompdump
 fi
 zmodload -i zsh/complist
+export PATH
 PROMPT_EOL_MARK=""
 last_repository=
