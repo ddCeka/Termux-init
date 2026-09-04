@@ -88,6 +88,10 @@ export npm_config_userconfig=$HOME/.config/npm/npmrc
 # cargo
 export CARGO_HOME=$HOME/.local/cargo
 
+# opam
+export OPAMROOT=$HOME/.local/opam
+[[ ! -r '$HOME/.local/opam/opam-init/init.zsh' ]] || source '$HOME/.local/opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+
 # mlocate shared storage path
 export LOCATE_PATH="$HOME/.local/state/mlocate/sdcard.db"
 
