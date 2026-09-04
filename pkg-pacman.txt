@@ -4,7 +4,6 @@ bat
 dust
 eza
 fd
-file
 fzf
 gnupg
 htop
@@ -22,7 +21,6 @@ zsh-completions
 
 # Archiving/compression utilities.
 7zip
-bsdtar
 lz4
 lzip
 lzop
@@ -45,21 +43,16 @@ megatools
 monolith
 
 # Development (tools).
-android-tools
-autoconf
-automake
 apkeditor
 apksigner
 apktool
+base-devel
 bc
 binutils
 bison
-build-essential
 busybox
 cmake
 expac
-file
-gettext
 gh
 git
 git-absorb
@@ -70,13 +63,11 @@ help2man
 iconv
 jq-lsp
 lazygit
-libtool
 lua-language-server
 marksman
 mono
 ninja
-nodejs
-npm
+nodejs-lts
 openssh
 patchelf
 patchutils

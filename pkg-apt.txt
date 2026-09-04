@@ -5,7 +5,6 @@ bat
 dust
 eza
 fd
-file
 fzf
 gnupg
 htop
@@ -46,15 +45,12 @@ megatools
 monolith
 
 # Development (tools).
-android-tools
 apkeditor
 apksigner
 apktool
 bison
 build-essential
 busybox
-file
-gettext
 gh
 git
 git-absorb
