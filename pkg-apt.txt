@@ -67,6 +67,8 @@ marksman
 mono
 ninja
 nodejs-lts
+ocaml
+opam
 patchelf
 patchutils
 pcre
