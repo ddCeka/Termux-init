@@ -55,6 +55,7 @@ expac
 gh
 git
 git-absorb
+git-cliff
 git-delta
 git-extras
 git-lfs
