@@ -165,8 +165,8 @@ alias ddl='dead-domains-linter'
 
 # Applications shortcuts
 alias tprop="$editor '$HOME/.termux/termux.properties'"
-alias cclean="rm -rf $HOME/.cache"
-alias bclean="rm -rf $HOME/build && mkdir build"
+alias cclean='rm -rf "$HOME/.cache" "$HOME/app/logs/cleaner-log.txt"'
+alias bclean='rm -rf "$HOME/build" && mkdir build'
 alias pclean='killall -9 com.termux.api gpg-agent pulseaudio ssh-agent termux-wake-lock'
 alias ebashrc="$editor '$HOME/.config/bash/bashrc'"
 alias ebashal="$editor '$HOME/.config/bash/aliases.bash'"
