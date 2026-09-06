@@ -68,9 +68,8 @@ marksman
 mono
 ninja
 nodejs-lts
-ocaml
-opam
 openssh
+openssh-tool
 patchelf
 patchutils
 pcre

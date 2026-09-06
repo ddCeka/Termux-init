@@ -69,6 +69,7 @@ ninja
 nodejs-lts
 ocaml
 opam
+openssh-tool
 patchelf
 patchutils
 pcre
