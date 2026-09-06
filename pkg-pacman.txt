@@ -46,7 +46,6 @@ monolith
 apkeditor
 apksigner
 apktool
-base-devel
 bc
 binutils
 bison
@@ -69,7 +68,7 @@ mono
 ninja
 nodejs-lts
 openssh
-openssh-tool
+openssl-tool
 patchelf
 patchutils
 pcre

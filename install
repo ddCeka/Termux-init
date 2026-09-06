@@ -8,7 +8,7 @@ cleaner=$HOME/bin/termux-junk-cleaner
 
 # To check if Termux is being used
 if [ "$(pgrep -c com.termux)" -eq 0 ]; then
-	cecho r "please make sure that you are using termux, this script is only made for termux"
+	echo "please make sure that you are using termux, this script is only made for termux"
 	exit 0
 fi
 
@@ -128,6 +128,17 @@ if [[ -f "$SCRIPT_DIR/pkg-${package}.txt" ]]; then
             esac
         done
     fi
+fi
+
+if [ -n "$(command -v pacman)" ]; then
+    cecho g "\n► Install base devel package?\n"
+    select strictreply in "Yes" "No"; do
+        relaxedreply=${strictreply:-$REPLY}
+        case $relaxedreply in
+            Yes | yes | y ) pacman -S base-devel; break;;
+            No  | no  | n ) break;;
+        esac
+    done
 fi
 
 cecho g "\n► Install local python packages?\n"
